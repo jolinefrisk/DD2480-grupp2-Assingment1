@@ -1,5 +1,3 @@
-
-
 import java.lang.Math;
 
 public class Main {
@@ -12,11 +10,21 @@ public class Main {
         NOTUSED(777),
         ORR(1),
         ANDD(2);
+
+        private final int value;
+
+        CONNECTORS(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
     }
 
     // INPUT VARIABLES
-    
-    public static NUMPOINTS = ;
+
+    // public static NUMPOINTS = ;
 
     public static boolean DECIDE() {
         /*
@@ -31,34 +39,62 @@ public class Main {
         return false;
     }
 
-    public static boolean[] CMV(String[][] LIC) {
-        
+    /*
+     * 
+     * public static boolean[] CMV(String[][] LIC) {
+     * 
+     * return false;
+     * }
+     */
 
-        return false;
-    }
+    public static boolean[][] PUM(CONNECTORS[][] LCM, boolean[] CMV) {
 
-    public static boolean[][] PUM(String[][] LCM) {
-        
-        return false;
+        int n = CMV.length;
+        boolean[][] PUM_matrix = new boolean[n][n];
+
+        for (int i = 0; i < n; i++) {
+
+            for (int j = 0; j < n; j++) {
+
+                if (LCM[i][j] == CONNECTORS.NOTUSED) {
+                    PUM_matrix[i][j] = true;
+                }
+
+                else if (LCM[i][j] == CONNECTORS.ANDD) {
+                    if (CMV[i] == true && CMV[j] == true) {
+                        PUM_matrix[i][j] = true;
+                    }
+                }
+
+                else if (LCM[i][j] == CONNECTORS.ORR) {
+                    if (CMV[i] == true || CMV[j] == true) {
+                        PUM_matrix[i][j] = true;
+                    }
+                }
+
+            }
+        }
+
+        return PUM_matrix;
     }
 
     // Returns boolean array
-    public static boolean[] FUV(boolean[] CMV, boolean[][] PUM) {
-        
-        return false;
-    }
 
-
+    /*
+     * public static boolean[] FUV(boolean[] CMV, boolean[][] PUM) {
+     * 
+     * return false;
+     * }
+     */
     public static boolean launch(boolean[] FUV) {
-        
+
         return false;
     }
 
     public static void main(String[] args) {
-       Main main = new Main();
-    
-       main.DECIDE();
-    }
+        Main main = new Main();
 
+        main.DECIDE();
+    }
 
 }
