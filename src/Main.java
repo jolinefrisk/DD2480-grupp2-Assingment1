@@ -22,12 +22,14 @@ public class Main {
         }
     }
 
+
     // INPUT VARIABLES
     public static int NUMPOINTS;  // The number of planar data points
     public static double[] POINTS; // Array containing the coordinates of data points
-    // PARAMETERS = 0;  // Parameters for LIC, fix later
     public static CONNECTORS[][] LCM = new CONNECTORS[15][15]; // Logical connector Matrix
     public static boolean[] PUV = new boolean[NUMPOINTS]; // Preliminary Unlocking Vector
+
+    // PARAMETERS = 0;  // Parameters for LIC, fix later
 
     // OUTPUT VARIABLE
     public static boolean DECIDE() {
@@ -43,13 +45,17 @@ public class Main {
         return false;
     }
 
-    /*
-     * 
-     * public static boolean[] CMV(String[][] LIC) {
-     * 
-     * return false;
-     * }
-     */
+      
+      public static boolean[] CMV() {
+        boolean[] CMV = new boolean[15];
+        ConditionsMet conditionsMet = new ConditionsMet();
+
+        for (int i = 0; i <= 14; i++) {
+            CMV[i] = conditionsMet().condition(i);
+        }
+      
+      return CMV;
+      }
 
     public static boolean[][] PUM(CONNECTORS[][] LCM, boolean[] CMV) {
 
