@@ -23,9 +23,13 @@ public class Main {
     }
 
     // INPUT VARIABLES
+    public static int NUMPOINTS;  // The number of planar data points
+    public static double[] POINTS; // Array containing the coordinates of data points
+    // PARAMETERS = 0;  // Parameters for LIC, fix later
+    public static CONNECTORS[][] LCM = new CONNECTORS[15][15]; // Logical connector Matrix
+    public static boolean[] PUV = new boolean[NUMPOINTS]; // Preliminary Unlocking Vector
 
-    // public static NUMPOINTS = ;
-
+    // OUTPUT VARIABLE
     public static boolean DECIDE() {
         /*
          * Call upon CMV, PUM, FUV, launch methods
