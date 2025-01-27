@@ -22,14 +22,13 @@ public class Main {
         }
     }
 
-
     // INPUT VARIABLES
-    public static int NUMPOINTS;  // The number of planar data points
+    public static int NUMPOINTS; // The number of planar data points
     public static double[] POINTS; // Array containing the coordinates of data points
     public static CONNECTORS[][] LCM = new CONNECTORS[15][15]; // Logical connector Matrix
     public static boolean[] PUV = new boolean[NUMPOINTS]; // Preliminary Unlocking Vector
 
-    // PARAMETERS = 0;  // Parameters for LIC, fix later
+    // PARAMETERS = 0; // Parameters for LIC, fix later
 
     // OUTPUT VARIABLE
     public static boolean DECIDE() {
@@ -45,44 +44,53 @@ public class Main {
         return false;
     }
 
-      
-      public static boolean[] CMV() {
-        boolean[] CMV = new boolean[15];
-        ConditionsMet conditionsMet = new ConditionsMet();
-
-        for (int i = 0; i <= 14; i++) {
-            CMV[i] = conditionsMet().condition(i);
-        }
-      
-      return CMV;
-      }
+    /*
+     * public static boolean[] CMV() {
+     * boolean[] CMV = new boolean[15];
+     * ConditionsMet conditionsMet = new ConditionsMet();
+     * 
+     * for (int i = 0; i <= 14; i++) {
+     * CMV[i] = conditionsMet().condition(i);
+     * }
+     * 
+     * return CMV;
+     * }
+     */
 
     public static boolean[][] PUM(CONNECTORS[][] LCM, boolean[] CMV) {
 
         int n = CMV.length;
         boolean[][] PUM_matrix = new boolean[n][n];
 
-        for (int i = 0; i < n; i++) {
+        if (n == LCM[0].length && n == LCM[1].length) {
 
-            for (int j = 0; j < n; j++) {
+            for (int i = 0; i < n; i++) {
 
-                if (LCM[i][j] == CONNECTORS.NOTUSED) {
-                    PUM_matrix[i][j] = true;
-                }
+                for (int j = 0; j < n; j++) {
 
-                else if (LCM[i][j] == CONNECTORS.ANDD) {
-                    if (CMV[i] == true && CMV[j] == true) {
+                    if (LCM[i][j] == CONNECTORS.NOTUSED) {
                         PUM_matrix[i][j] = true;
                     }
-                }
 
-                else if (LCM[i][j] == CONNECTORS.ORR) {
-                    if (CMV[i] == true || CMV[j] == true) {
-                        PUM_matrix[i][j] = true;
+                    else if (LCM[i][j] == CONNECTORS.ANDD) {
+                        if (CMV[i] == true && CMV[j] == true) {
+                            PUM_matrix[i][j] = true;
+                        }
                     }
-                }
 
+                    else if (LCM[i][j] == CONNECTORS.ORR) {
+                        if (CMV[i] == true || CMV[j] == true) {
+                            PUM_matrix[i][j] = true;
+                        }
+                    }
+
+                }
             }
+
+        }
+
+        else {
+            throw new IllegalArgumentException("The LCM should be a n x n vector, where n is the length of CMV");
         }
 
         return PUM_matrix;
