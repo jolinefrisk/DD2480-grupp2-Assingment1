@@ -54,20 +54,110 @@ public class ConditionsMet {
                 return false;
         }
     }
+    private static double distance(double x1, double y1, double x2, double y2) {
+        return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+    }
+    private static double angle(double x1, double y1, double x2, double y2, double x3, double y3) {
+        double vector1X = x1 - x2;
+        double vector1Y = y1 - y2;
+
+        double vector2X = x3 - x2;
+        double vector2Y = y3 - y2;
+
+        double dotProduct = (vector1X * vector2X) + (vector1Y * vector2Y);
+
+        double magnitude1 = Math.sqrt(vector1X * vector1X + vector1Y * vector1Y);
+        double magnitude2 = Math.sqrt(vector2X * vector2X + vector2Y * vector2Y);
+
+        return Math.acos(dotProduct / (magnitude1 * magnitude2));
+    }
+    private static double area(double x1, double y1, double x2, double y2, double x3, double y3) {
+        return Math.abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2);
+    }
+    public static boolean inRadius(double x1, double y1, double x2, double y2, double x3, double y3, double RADIUS1) {
+        double d1 = distance(x1, y1, x2, y2);
+        double d2 = distance(x2, y2, x3, y3);
+        double d3 = distance(x3, y3, x1, y1);
+        double dAvragebetween= (d1 + d2 + d3) / 2;
+        double area = Math.sqrt(dAvragebetween * (dAvragebetween - d1) * (dAvragebetween - d2) * (dAvragebetween - d3));
+        if (area == 0) {
+            return d1 <= 2 * RADIUS1 && d2 <= 2 * RADIUS1 && d3 <= 2 * RADIUS1;
+        }
+        double circumRadius = (d1 * d2 * d3) / (4 * area);
+        return circumRadius <= RADIUS1;
+    }
 
     private boolean conditionZero(int parameters) {
+        if (NUMPOINTS < 2) {
+            return false; 
+        }
+
+        for (int i = 0; i < NUMPOINTS - 1; i++) {
+            double distance = distance(x[i], y[i], x[i + 1], y[i + 1]);
+            if (distance > LENGTH1) {
+                return true; // Condition met
+            }
+        }
         return false;
     }
 
     private boolean conditionOne(int parameters) {
+        if (NUMPOINTS < 3) {
+            return false;
+        }
+
+        // Iterate through all sets of three consecutive points.
+        for (int i = 0; i < NUMPOINTS - 2; i++) {
+            // Get the coordinates of the three consecutive points.
+            double x1 = x[i]; double y1 = y[i];
+            double x2 = x[i + 1]; double y2 = y[i + 1];
+            double x3 = x[i + 2]; double y3 = y[i + 2];
+            if (!inRadius(x1, y1, x2, y2, x3, y3, RADIUS1)) {
+                return true; // Condition met
+            }
+        }
         return false;
     }
 
     private boolean conditionTwo(int parameters) {
+        if (NUMPOINTS < 3 || parameters.EPSILON < 0 || parameters.EPSILON >= Math.PI) {
+            return false; 
+        }
+        for (int i = 0; i < NUMPOINTS - 2; i++) {
+            double x1 = x[i], y1 = y[i];   
+            double x2 = x[i + 1], y2 = y[i + 1]; 
+            double x3 = x[i + 2], y3 = y[i + 2]; 
+            if ((x1 == x2 && y1 == y2) || (x3 == x2 && y3 == y2)) {
+                continue;
+            }
+            double angle = angle(x1, y1, x2, y2, x3, y3);
+
+            if (angle < (Math.PI - EPSILON) || angle > (Math.PI + EPSILON)) {
+                return true; // Condition met
+            }
+        }
         return false;
     }
 
     private boolean conditionThree(int parameters) {
+        if (NUMPOINTS < 3 || AREA1 < 0) {
+            return false; // Not enough points or invalid AREA1
+        }
+    
+        // Iterate through all sets of three consecutive points
+        for (int i = 0; i < NUMPOINTS - 2; i++) {
+            // Get the coordinates of the three consecutive points
+            double x1 = x[i], y1 = y[i];     // First point
+            double x2 = x[i + 1], y2 = y[i + 1]; // Second point
+            double x3 = x[i + 2], y3 = y[i + 2]; // Third point
+    
+            // Calculate the area of the triangle
+            double area = area(x1, y1, x2, y2, x3, y3);
+    
+            // Check if the area is greater than AREA1
+            if (area > AREA1) {
+                return true; // Condition met
+            }
         return false;
     }
 
@@ -128,3 +218,4 @@ public class ConditionsMet {
     }
 
 }
+
