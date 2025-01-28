@@ -62,4 +62,41 @@ public class Testfile {
 
                 assertEquals(expected, message);
         }
+
+        @Test
+        public void testPositiveCondidtionFive() {
+
+                double[] X = { 5.0, 4.0, 6.0, 3.0 };
+
+                int numpoints = 4;
+
+                assertTrue(ConditionsMet.conditionFive(X, numpoints));
+        }
+
+        @Test
+        public void testNegativeCondidtionFive() {
+
+                double[] X = { 1.0, 2.0, 3.0, 4.0 };
+
+                int numpoints = 4;
+
+                assertFalse(ConditionsMet.conditionFive(X, numpoints));
+        }
+
+        @Test
+        public void testCondidtionFiveIllegalArgument() {
+
+                double[] X = { 1.0, 2.0, 3.0, 4.0 };
+
+                int numpoints = 2;
+
+                Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                        ConditionsMet.conditionFive(X, numpoints);
+                });
+
+                String expected = "The length of X should be equal to numpoints";
+                String message = exception.getMessage();
+
+                assertEquals(expected, message);
+        }
 }

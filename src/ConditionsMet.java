@@ -1,10 +1,9 @@
 
-
 public class ConditionsMet {
-    
-    // parameters should not be an int but this works for now 
-    private boolean Condition(int conditionNumber, int parameters) {
-        switch(conditionNumber) {
+
+    // parameters should not be an int but this works for now
+    public boolean Condition(int conditionNumber, int parameters, double[] X, double[] Y, int numpoints) {
+        switch (conditionNumber) {
             case 0:
                 return conditionZero(parameters);
 
@@ -21,7 +20,7 @@ public class ConditionsMet {
                 return conditionFour(parameters);
 
             case 5:
-                return conditionFive(parameters);
+                return conditionFive(X, numpoints);
 
             case 6:
                 return conditionSix(parameters);
@@ -52,7 +51,7 @@ public class ConditionsMet {
 
             // Behöver fixa en faktiskt error hantering och inte bara return false här
             default:
-            return false;
+                return false;
         }
     }
 
@@ -76,7 +75,19 @@ public class ConditionsMet {
         return false;
     }
 
-    private boolean conditionFive(int parameters) {
+    public static boolean conditionFive(double[] X, int numpoints) {
+
+        if (X.length == numpoints) {
+
+            for (int i = 0; i < numpoints - 1; i++) {
+                if (X[i + 1] - X[i] < 0) {
+                    return true;
+                }
+            }
+        } else {
+            throw new IllegalArgumentException("The length of X should be equal to numpoints");
+        }
+
         return false;
     }
 
