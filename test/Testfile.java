@@ -1,6 +1,7 @@
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+
 public class Testfile {
         @Test
         public void testPUMmixedConnectors() {
@@ -61,6 +62,26 @@ public class Testfile {
                 String message = exception.getMessage();
 
                 assertEquals(expected, message);
+        }
+        @Test
+        public void testPositiveConditionOne() {
+
+                double[] X = {0.0, 1.0, 2.0, 3.0};
+                double[] Y = { 0.0, 1.0, 2.0, 3.0};
+                int numpoints = 4;
+                int parameter = 2;
+
+                assertTrue(ConditionsMet.conditionOne(parameter, X,Y, numpoints));
+        }
+        @Test
+        public void testNegativeCondidtionOne() {
+
+                double[] X = {0.0, 1.0, 2.0, 3.0};
+                double[] Y = { 0.0, 1.0, 2.0, 3.0};
+                int numpoints = 4;
+                int parameter = 1;
+
+                assertTrue(ConditionsMet.conditionOne(parameter, X,Y, numpoints));
         }
 
         @Test

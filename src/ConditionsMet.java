@@ -109,7 +109,7 @@ public class ConditionsMet {
         return false;
     }
 
-    private boolean conditionOne(int parameters, double[] x, double[] y, int numpoints) {
+    public static boolean conditionOne(int parameters, double[] x, double[] y, int numpoints) {
         /*input params Radius1 x,y vector and numpoints 
          * returns true if there exists at least one set of three consecutive data points that cannot be contained in a circle of radius RADIUS1
          * else return false
@@ -131,7 +131,7 @@ public class ConditionsMet {
         return false;
     }
 
-    private boolean conditionTwo(int parameters, double[] x, double[] y, int numpoints) {
+    public static boolean conditionTwo(int parameters, double[] x, double[] y, int numpoints) {
         /*input param Epsilon and PI x,y vector and numpoints 
          * returns true if exists at least one set of three consecutive data points which form an angle
          * else return false
@@ -156,7 +156,7 @@ public class ConditionsMet {
         return false;
     }
 
-    private boolean conditionThree(int parameters, double[] x, double[] y, int numpoints) {
+    public static boolean conditionThree(int parameters, double[] x, double[] y, int numpoints) {
         /*input param area 1 x,y vector and numpoints 
          * returns true if there are 3 consecutive points that form a triangle with an area greater than AREA1
          * else return false
@@ -184,7 +184,7 @@ public class ConditionsMet {
         
     }
 
-    private boolean conditionFour(int parameters) {
+    public static boolean conditionFour(int parameters) {
         return false;
     }
 
