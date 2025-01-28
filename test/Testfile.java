@@ -99,4 +99,20 @@ public class Testfile {
 
                 assertEquals(expected, message);
         }
+
+        @Test
+        public void testFUVfalsePUV() {
+
+                boolean[] PUV = {false , false, false};
+
+                boolean[][] PUM = {
+                        { true, false, true },
+                        { false, true, true },
+                        { true, true, true }
+        };
+
+                boolean[] expected = {true, true, true};
+
+                assertEquals(expected, Main.FUV(PUM, PUV));
+        }
 }
