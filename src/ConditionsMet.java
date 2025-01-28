@@ -91,7 +91,7 @@ public class ConditionsMet {
         return circumRadius <= RADIUS1;
     }
 
-    private boolean conditionZero(int parameters, double[] x, double[] y, int numpoints) {
+    private boolean conditionZero(Parameters parameters, double[] x, double[] y, int numpoints) {
         /*input param Lenght 1 x,y vectir and numpoint
          * returns true if there exists at least one set of two consecutive data points such that the distance between them is greater than LENGTH1
          * else return false
@@ -102,14 +102,14 @@ public class ConditionsMet {
 
         for (int i = 0; i < numpoints - 1; i++) {
             double distance = distance(x[i], y[i], x[i + 1], y[i + 1]);
-            if (distance > parameters) {
+            if (distance > parameters.getLength1()) {
                 return true; // Condition met
             }
         }
         return false;
     }
 
-    public static boolean conditionOne(int parameters, double[] x, double[] y, int numpoints) {
+    public static boolean conditionOne(Parameters parameters, double[] x, double[] y, int numpoints) {
         /*input params Radius1 x,y vector and numpoints 
          * returns true if there exists at least one set of three consecutive data points that cannot be contained in a circle of radius RADIUS1
          * else return false
@@ -124,20 +124,20 @@ public class ConditionsMet {
             double x1 = x[i]; double y1 = y[i];
             double x2 = x[i + 1]; double y2 = y[i + 1];
             double x3 = x[i + 2]; double y3 = y[i + 2];
-            if (!inRadius(x1, y1, x2, y2, x3, y3, parameters)) {
+            if (!inRadius(x1, y1, x2, y2, x3, y3, parameters.getRadius1())) {
                 return true; // Condition met
             }
         }
         return false;
     }
 
-    public static boolean conditionTwo(int parameters, double[] x, double[] y, int numpoints) {
+    public static boolean conditionTwo(Parameters parameters, double[] x, double[] y, int numpoints) {
         /*input param Epsilon and PI x,y vector and numpoints 
          * returns true if exists at least one set of three consecutive data points which form an angle
          * else return false
          */
         //Not sure how to both get PI and Epsilon from parameters so at moment Math.PI as PI and parameters as Epsilon
-        if (numpoints < 3 || parameters < 0 || parameters >= Math.PI) {
+        if (numpoints < 3 || parameters.getEpsilon() < 0 || parameters.getEpsilon() >= Main.PI) {
             return false; 
         }
         for (int i = 0; i < numpoints - 2; i++) {
@@ -149,19 +149,19 @@ public class ConditionsMet {
             }
             double angle = angle(x1, y1, x2, y2, x3, y3);
 
-            if (angle < (Math.PI - parameters) || angle > (Math.PI + parameters)) {
+            if (angle < (Math.PI - parameters.getEpsilon()) || angle > (Math.PI + parameters.getEpsilon())) {
                 return true; // Condition met
             }
         }
         return false;
     }
 
-    public static boolean conditionThree(int parameters, double[] x, double[] y, int numpoints) {
-        /*input param area 1 x,y vector and numpoints 
+    public static boolean conditionThree(Parameters parameters, double[] x, double[] y, int numpoints) {
+        /*input param area1 x,y vector and numpoints 
          * returns true if there are 3 consecutive points that form a triangle with an area greater than AREA1
          * else return false
          */
-        if (numpoints < 3 || parameters < 0) {
+        if (numpoints < 3 || parameters.getArea1() < 0) {
             return false; 
         }
     
@@ -176,7 +176,7 @@ public class ConditionsMet {
             double area = area(x1, y1, x2, y2, x3, y3);
     
             // Check if the area is greater than AREA1
-            if (area > parameters) {
+            if (area > parameters.getArea1()) {
                 return true; // Condition met
             }
         }
