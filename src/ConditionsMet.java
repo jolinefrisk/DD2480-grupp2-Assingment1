@@ -5,16 +5,16 @@ public class ConditionsMet {
     public boolean Condition(int conditionNumber, int parameters, double[] X, double[] Y, int numpoints) {
         switch (conditionNumber) {
             case 0:
-                return conditionZero(parameters);
+                return conditionZero(parameters, X, Y, numpoints);
 
             case 1:
-                return conditionOne(parameters);
+                return conditionOne(parameters, X, Y, numpoints);
 
             case 2:
-                return conditionTwo(parameters);
+                return conditionTwo(parameters, X, Y, numpoints);
 
             case 3:
-                return conditionThree(parameters);
+                return conditionThree(parameters, X, Y, numpoints);
 
             case 4:
                 return conditionFour(parameters);
@@ -55,9 +55,11 @@ public class ConditionsMet {
         }
     }
     private static double distance(double x1, double y1, double x2, double y2) {
+        /*calculates the distance between two datapoints */
         return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     }
     private static double angle(double x1, double y1, double x2, double y2, double x3, double y3) {
+        /*calculates the angle between two vectors */
         double vector1X = x1 - x2;
         double vector1Y = y1 - y2;
 
@@ -72,9 +74,11 @@ public class ConditionsMet {
         return Math.acos(dotProduct / (magnitude1 * magnitude2));
     }
     private static double area(double x1, double y1, double x2, double y2, double x3, double y3) {
+        /*calculates the area of datapoints  */
         return Math.abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2);
     }
     public static boolean inRadius(double x1, double y1, double x2, double y2, double x3, double y3, double RADIUS1) {
+        /*Calculates the circumfrance radius of the dataoiunts  */
         double d1 = distance(x1, y1, x2, y2);
         double d2 = distance(x2, y2, x3, y3);
         double d3 = distance(x3, y3, x1, y1);
@@ -87,43 +91,56 @@ public class ConditionsMet {
         return circumRadius <= RADIUS1;
     }
 
-    private boolean conditionZero(int parameters) {
-        if (NUMPOINTS < 2) {
+    private boolean conditionZero(int parameters, double[] x, double[] y, int numpoints) {
+        /*input param Lenght 1 x,y vectir and numpoint
+         * returns true if there exists at least one set of two consecutive data points such that the distance between them is greater than LENGTH1
+         * else return false
+         */
+        if (numpoints < 2) {
             return false; 
         }
 
-        for (int i = 0; i < NUMPOINTS - 1; i++) {
+        for (int i = 0; i < numpoints - 1; i++) {
             double distance = distance(x[i], y[i], x[i + 1], y[i + 1]);
-            if (distance > LENGTH1) {
+            if (distance > parameters) {
                 return true; // Condition met
             }
         }
         return false;
     }
 
-    private boolean conditionOne(int parameters) {
-        if (NUMPOINTS < 3) {
+    private boolean conditionOne(int parameters, double[] x, double[] y, int numpoints) {
+        /*input params Radius1 x,y vector and numpoints 
+         * returns true if there exists at least one set of three consecutive data points that cannot be contained in a circle of radius RADIUS1
+         * else return false
+         */
+        if (numpoints < 3) {
             return false;
         }
 
         // Iterate through all sets of three consecutive points.
-        for (int i = 0; i < NUMPOINTS - 2; i++) {
+        for (int i = 0; i < numpoints - 2; i++) {
             // Get the coordinates of the three consecutive points.
             double x1 = x[i]; double y1 = y[i];
             double x2 = x[i + 1]; double y2 = y[i + 1];
             double x3 = x[i + 2]; double y3 = y[i + 2];
-            if (!inRadius(x1, y1, x2, y2, x3, y3, RADIUS1)) {
+            if (!inRadius(x1, y1, x2, y2, x3, y3, parameters)) {
                 return true; // Condition met
             }
         }
         return false;
     }
 
-    private boolean conditionTwo(int parameters) {
-        if (NUMPOINTS < 3 || parameters.EPSILON < 0 || parameters.EPSILON >= Math.PI) {
+    private boolean conditionTwo(int parameters, double[] x, double[] y, int numpoints) {
+        /*input param Epsilon and PI x,y vector and numpoints 
+         * returns true if exists at least one set of three consecutive data points which form an angle
+         * else return false
+         */
+        //Not sure how to both get PI and Epsilon from parameters so at moment Math.PI as PI and parameters as Epsilon
+        if (numpoints < 3 || parameters < 0 || parameters >= Math.PI) {
             return false; 
         }
-        for (int i = 0; i < NUMPOINTS - 2; i++) {
+        for (int i = 0; i < numpoints - 2; i++) {
             double x1 = x[i], y1 = y[i];   
             double x2 = x[i + 1], y2 = y[i + 1]; 
             double x3 = x[i + 2], y3 = y[i + 2]; 
@@ -132,20 +149,24 @@ public class ConditionsMet {
             }
             double angle = angle(x1, y1, x2, y2, x3, y3);
 
-            if (angle < (Math.PI - EPSILON) || angle > (Math.PI + EPSILON)) {
+            if (angle < (Math.PI - parameters) || angle > (Math.PI + parameters)) {
                 return true; // Condition met
             }
         }
         return false;
     }
 
-    private boolean conditionThree(int parameters) {
-        if (NUMPOINTS < 3 || AREA1 < 0) {
-            return false; // Not enough points or invalid AREA1
+    private boolean conditionThree(int parameters, double[] x, double[] y, int numpoints) {
+        /*input param area 1 x,y vector and numpoints 
+         * returns true if there are 3 consecutive points that form a triangle with an area greater than AREA1
+         * else return false
+         */
+        if (numpoints < 3 || parameters < 0) {
+            return false; 
         }
     
         // Iterate through all sets of three consecutive points
-        for (int i = 0; i < NUMPOINTS - 2; i++) {
+        for (int i = 0; i < numpoints - 2; i++) {
             // Get the coordinates of the three consecutive points
             double x1 = x[i], y1 = y[i];     // First point
             double x2 = x[i + 1], y2 = y[i + 1]; // Second point
@@ -155,10 +176,12 @@ public class ConditionsMet {
             double area = area(x1, y1, x2, y2, x3, y3);
     
             // Check if the area is greater than AREA1
-            if (area > AREA1) {
+            if (area > parameters) {
                 return true; // Condition met
             }
+        }
         return false;
+        
     }
 
     private boolean conditionFour(int parameters) {
