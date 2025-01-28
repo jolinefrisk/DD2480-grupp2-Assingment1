@@ -98,12 +98,34 @@ public class Main {
 
     // Returns boolean array
 
-    /*
-     * public static boolean[] FUV(boolean[] CMV, boolean[][] PUM) {
-     * 
-     * return false;
-     * }
+    /*FUV - The Final Unlocking Vector
+     * FUV[i] = true if 
+     * PUV[i] = false or all elements in PUM row i: PUM[i][] = true
      */
+    public static boolean[] FUV(boolean[][] PUM,boolean[] PUV) {
+        int n = PUV.length;
+        boolean[] FUV_vector = new boolean[n];
+
+        for (int i = 0; i < n; i++){
+            if (PUV[i] == false){
+                FUV_vector[i] = true;
+                continue;
+            }  
+
+            boolean no_false = true;
+            for (int el = 0; el < n; el++){
+                if(!PUM[i][el]){
+                    no_false = false;
+                    break;
+                }
+            }
+
+            FUV_vector[i] = no_false;
+        }
+        return FUV_vector;
+    }
+
+
     public static boolean launch(boolean[] FUV) {
 
         return false;
