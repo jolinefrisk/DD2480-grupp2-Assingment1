@@ -64,13 +64,36 @@ public class Testfile {
         }
 
         @Test
+        public void testPositiveConditionZero() {
+
+                double[] X = {0.0, 1.0, 2.0, 3.0};
+                double[] Y = { 0.0, 1.0, 2.0, 3.0};
+                int numpoints = 4;
+                Parameters parameter = new Parameters();
+                parameter.setLength1(0.0);
+
+                assertTrue(ConditionsMet.conditionZero(parameter, X,Y, numpoints));
+        }
+        @Test
+        public void testNegativeCondidtionZero() {
+
+                double[] X = {1, 1, 1, 1}; 
+                double[] Y = {2, 2, 2, 2};
+                int numpoints = 4;
+                Parameters parameter = new Parameters();
+                parameter.setLength1(0.0);
+
+                assertFalse(ConditionsMet.conditionZero(parameter, X,Y, numpoints));
+        }
+        @Test
+
         public void testPositiveConditionOne() {
 
                 double[] X = { 0.0, 1.0, 2.0, 3.0 };
                 double[] Y = { 0.0, 1.0, 2.0, 3.0 };
                 int numpoints = 4;
                 Parameters parameter = new Parameters();
-                parameter.setLength1(1.0);
+                parameter.setRadius1(1.0);
 
                 assertTrue(ConditionsMet.conditionOne(parameter, X, Y, numpoints));
         }
@@ -78,13 +101,80 @@ public class Testfile {
         @Test
         public void testNegativeCondidtionOne() {
 
-                double[] X = { 0.0, 1.0, 2.0, 3.0 };
-                double[] Y = { 0.0, 1.0, 2.0, 3.0 };
+                double[] X = {1.0, 1.5, 0.5, 3.0};
+                double[] Y = { 1.0, 1.5, 0.5 , 1.0};
                 int numpoints = 4;
                 Parameters parameter = new Parameters();
-                parameter.setLength1(5.0);
+                parameter.setRadius1(1.0);
 
-                assertTrue(ConditionsMet.conditionOne(parameter, X, Y, numpoints));
+                assertTrue(ConditionsMet.conditionOne(parameter, X,Y, numpoints));
+        }
+        @Test
+        public void testPositiveCondidtionTwo() {
+                double[] X = {0, 1, 1, 3, 4}; 
+                double[] Y = {0, 5, 1, 3, 6}; 
+                int numpoints = 5;
+                Parameters parameter = new Parameters();
+                parameter.setEpsilon(2.0);
+
+                assertTrue(ConditionsMet.conditionTwo(parameter, X,Y, numpoints));
+        }
+        @Test
+        public void testNegativeCondidtionTwo() {
+
+                double[] X = {0, 1, 2, 3, 4};
+                double[] Y = {0, 0, 0, 0, 0}; // All points in a straight line
+                int numpoints = 5;
+                Parameters parameter = new Parameters();
+                parameter.setEpsilon(2.0);
+
+                assertFalse(ConditionsMet.conditionTwo(parameter, X,Y, numpoints));
+        }
+        @Test
+        public void testPositiveCondidtionThree() {
+
+                double[] X = {0, 1, 1.1, 10}; 
+                double[] Y = {0, 0, 10, 0}; 
+                int numpoints = 4;
+                Parameters parameter = new Parameters();
+                parameter.setArea1(3.0);
+
+                assertTrue(ConditionsMet.conditionThree(parameter, X,Y, numpoints));
+        }       
+        @Test
+        public void testNegativeCondidtionThree() {
+
+                double[] X = {0, 1, 2, 3, 4}; // Points lie on a straight line
+                double[] Y = {0, 0, 0, 0, 0}; 
+                int numpoints = 4;
+                Parameters parameter = new Parameters();
+                parameter.setArea1(3.0);
+
+                assertFalse(ConditionsMet.conditionThree(parameter, X,Y, numpoints));
+        }
+        @Test
+        public void testPositiveCondidtionFour() {
+
+                double[] X = {1, -1, -1, 2};
+                double[] Y = {1, 1, -1, -1}; 
+                int numpoints = 4;
+                Parameters parameter = new Parameters();
+                parameter.setQPts(3);
+                parameter.setQuads(2);
+
+                assertTrue(ConditionsMet.conditionFour(parameter, X,Y, numpoints));
+        }
+        @Test
+        public void testNegativeCondidtionFour() {
+
+                double[] X = {0.0, 1.0, 2.0, 3.0};
+                double[] Y = { 0.0, 1.0, 2.0, 3.0};
+                int numpoints = 4;
+                Parameters parameter = new Parameters();
+                parameter.setQPts(3);
+                parameter.setQuads(2);
+
+                assertFalse(ConditionsMet.conditionFour(parameter, X,Y, numpoints));
         }
 
         @Test

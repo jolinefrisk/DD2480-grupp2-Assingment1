@@ -97,11 +97,9 @@ public class ConditionsMet {
         return circumRadius <= RADIUS1;
     }
 
-    private boolean conditionZero(Parameters parameters, double[] x, double[] y, int numpoints) {
-        /*
-         * input param Lenght 1 x,y vectir and numpoint
-         * returns true if there exists at least one set of two consecutive data points
-         * such that the distance between them is greater than LENGTH1
+    public static boolean conditionZero(Parameters parameters, double[] x, double[] y, int numpoints) {
+        /*input param Lenght 1 x,y vectir and numpoint
+         * returns true if there exists at least one set of two consecutive data points such that the distance between them is greater than LENGTH1
          * else return false
          */
         if (numpoints < 2) {
@@ -151,10 +149,9 @@ public class ConditionsMet {
          * which form an angle
          * else return false
          */
-        // Not sure how to both get PI and Epsilon from parameters so at moment Math.PI
-        // as PI and parameters as Epsilon
-        if (numpoints < 3 || parameters.getEpsilon() < 0 || parameters.getEpsilon() >= Math.PI) {
-            return false;
+        //Not sure how to both get PI and Epsilon from parameters so at moment Math.PI as PI and parameters as Epsilon
+        if (numpoints < 3 || parameters.getEpsilon() < 0 || parameters.getEpsilon() >= Main.PI) {
+            return false; 
         }
         for (int i = 0; i < numpoints - 2; i++) {
             double x1 = x[i], y1 = y[i];
