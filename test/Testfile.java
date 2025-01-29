@@ -186,4 +186,22 @@ public class Testfile {
 
                 assertArrayEquals(expected, Main.FUV(PUM, PUV));
         }
+
+        @Test
+        public void testLAUNCHtrue() {
+
+                boolean[] FUV = {true , true, true};
+                boolean expected = true;
+
+                assertEquals(expected, Main.launch(FUV));
+        }
+
+        @Test
+        public void testLAUNCHfalse() {
+
+                boolean[] FUV = {false , false, false};
+                boolean expected = false;
+
+                assertEquals(expected, Main.launch(FUV));
+        }
 }

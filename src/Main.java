@@ -136,8 +136,16 @@ public class Main {
 
 
     public static boolean launch(boolean[] FUV) {
-
-        return false;
+        int n = FUV.length;
+        boolean no_false = true;
+        for (int i = 0; i < n; i++){
+            if(!FUV[i]){
+                no_false = false;
+                break;
+            }
+        }
+        boolean launch_decision = no_false;
+        return launch_decision;
     }
 
     public static void main(String[] args) {
