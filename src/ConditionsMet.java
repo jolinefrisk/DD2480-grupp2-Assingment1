@@ -356,18 +356,18 @@ public class ConditionsMet {
         boolean inRadius1 = true;
         boolean inRadius2 = false;
 
-        for (int i = 0; i < numpoints - (parameters.getAPts() + parameters.getBPts()); i++) { 
+        for (int i = 0; i < numpoints - (parameters.getAPts() + parameters.getBPts() + 1); i++) { 
 
-            inRadius1 = inRadius(X[i], Y[i], X[i + parameters.getAPts()], 
-                                 Y[i + parameters.getAPts()], 
-                                 X[i + parameters.getAPts() + parameters.getBPts()],
-                                 Y[i + parameters.getAPts() + parameters.getBPts()],
+            inRadius1 = inRadius(X[i], Y[i], X[i + parameters.getAPts() + 1], 
+                                 Y[i + parameters.getAPts() + 1], 
+                                 X[i + parameters.getAPts() + parameters.getBPts() + 1],
+                                 Y[i + parameters.getAPts() + parameters.getBPts() + 1],
                                  parameters.getRadius1());
                 
-            inRadius2 = inRadius(X[i], Y[i], X[i + parameters.getAPts()], 
-                                 Y[i + parameters.getAPts()], 
-                                 X[i + parameters.getAPts() + parameters.getBPts()],
-                                 Y[i + parameters.getAPts() + parameters.getBPts()],
+            inRadius2 = inRadius(X[i], Y[i], X[i + parameters.getAPts() + 1], 
+                                 Y[i + parameters.getAPts() + 1], 
+                                 X[i + parameters.getAPts() + parameters.getBPts() + 1],
+                                 Y[i + parameters.getAPts() + parameters.getBPts() + 1],
                                  parameters.getRadius2());
 
             if (!inRadius1 && inRadius2) {
@@ -379,18 +379,18 @@ public class ConditionsMet {
 
     public static boolean conditionFourteen(Parameters parameters, double[] X, double[] Y, int numpoints) {
         // Initial conditions
-        if (parameters.getArea2() <= 0 || numpoints >= 5) {
+        if (parameters.getArea2() <= 0 || numpoints < 5) {
             return false;
         }  
 
         boolean greaterThanArea1 = false;
         boolean lesserThanArea2 = false;
 
-        for (int i = 0; i < numpoints - (parameters.getEPts() + parameters.getFPts()); i++) {
-            double area = area(X[i], Y[i], X[i + parameters.getEPts()], 
-                               Y[i + parameters.getEPts()], 
-                               X[i + parameters.getEPts() + parameters.getFPts()], 
-                               Y[i + parameters.getEPts() + parameters.getFPts()]);
+        for (int i = 0; i < numpoints - (parameters.getEPts() + parameters.getFPts() + 1); i++) {
+            double area = area(X[i], Y[i], X[i + parameters.getEPts() + 1], 
+                               Y[i + parameters.getEPts() + 1], 
+                               X[i + parameters.getEPts() + parameters.getFPts() + 1], 
+                               Y[i + parameters.getEPts() + parameters.getFPts() + 1]);
 
             if (area > parameters.getArea1()) {
                 greaterThanArea1 = true;

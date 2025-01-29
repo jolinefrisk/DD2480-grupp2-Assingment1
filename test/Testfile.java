@@ -247,8 +247,8 @@ public class Testfile {
         @Test
           public void testRadius1FitsConditionThirteen() {
 
-                double[] X = {3.0, 5.0, 2.0, 7.0, 4.0};
-                double[] Y = {5.0, 3.0, 1.0, 6.0, 3.0};
+                double[] X = {3.0, 1.0, 5.0, 7.0, 4.0};
+                double[] Y = {5.0, 2.0, 3.0, 6.0, 3.0};
 
                 int numpoints = 5;
 
@@ -282,16 +282,16 @@ public class Testfile {
           public void testPositiveConditionFourteen() {
 
                 // Expected area is 4
-                double[] X = {5.0, 9.0, 7.0};
-                double[] Y = {5.0, 5.0, 7.0};
+                double[] X = {5.0, 9.0, 7.0, 2.0, 8.0};
+                double[] Y = {5.0, 5.0, 7.0, 8.0, 2.0};
 
-                int numpoints = 3;
+                int numpoints = 5;
 
                 Parameters parameters = new Parameters();
                 parameters.setEPts(1);
                 parameters.setFPts(1);
                 parameters.setArea1(2);
-                parameters.setArea2(10);
+                parameters.setArea2(7);
                 
                 assertTrue(ConditionsMet.conditionFourteen(parameters, X, Y, numpoints));
         }
@@ -299,18 +299,16 @@ public class Testfile {
         @Test
         public void testFalseArea1ConditionFourteen() {
 
-                // Expected area is 4
-                double[] X = {5.0, 9.0, 7.0};
-                double[] Y = {5.0, 5.0, 7.0};
+                double[] X = {5.0, 4.0, 9.0, 2.0, 1.0};
+                double[] Y = {5.0, 5.0, 7.0, 6.0, 2.0};
 
-                int numpoints = 3;
+                int numpoints = 5;
 
                 Parameters parameters = new Parameters();
                 parameters.setEPts(1);
                 parameters.setFPts(1);
                 parameters.setArea1(5);
-                parameters.setArea2(10);
-                
+                parameters.setArea2(7);
 
                 assertFalse(ConditionsMet.conditionFourteen(parameters, X, Y, numpoints));
         }
