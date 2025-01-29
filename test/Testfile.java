@@ -176,6 +176,58 @@ public class Testfile {
         }
 
         @Test
+        public void testPositiveCondidtionTen() {
+
+                Parameters parameters = new Parameters();
+                parameters.setArea1(1.0);
+                parameters.setEPts(1);
+                parameters.setFPts(1);
+
+                double[] X = { 0.0, 1.0, 2.0, 3.0, 1.0 };
+                double[] Y = { 0.0, 2.0, 0.0, -1.0, 2.0 };
+                int numpoints = 5;
+
+                assertTrue(ConditionsMet.conditionTen(parameters, X, Y, numpoints));
+        }
+
+        @Test
+        public void testNegativeCondidtionTen() {
+
+                Parameters parameters = new Parameters();
+                parameters.setArea1(1.0);
+                parameters.setEPts(1);
+                parameters.setFPts(1);
+
+                double[] X = { 0.0, 1.0, 0.5, 3.0, 0.25 };
+                double[] Y = { 0.0, 2.0, 0.0, -1.0, 0.5 };
+                int numpoints = 5;
+
+                assertFalse(ConditionsMet.conditionTen(parameters, X, Y, numpoints));
+        }
+
+        @Test
+        public void testCondidtionTenIllegalArgument() {
+
+                Parameters parameters = new Parameters();
+                parameters.setArea1(1.0);
+                parameters.setEPts(1);
+                parameters.setFPts(1);
+
+                double[] X = { 0.0, 1.0, 2.0, 3.0, 4.0 };
+                double[] Y = { 0.0, 2.0 };
+                int numpoints = 5;
+
+                Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                        ConditionsMet.conditionTen(parameters, X, Y, numpoints);
+                });
+
+                String expected = "The length of X and Y should be equal to numpoints";
+                String message = exception.getMessage();
+
+                assertEquals(expected, message);
+        }
+
+        @Test
         public void testFUVfalsePUV() {
 
                 boolean[] PUV = { false, false, false };
@@ -242,7 +294,7 @@ public class Testfile {
         @Test
         public void testLAUNCHtrue() {
 
-                boolean[] FUV = {true , true, true};
+                boolean[] FUV = { true, true, true };
                 boolean expected = true;
 
                 assertEquals(expected, Main.launch(FUV));
@@ -251,7 +303,7 @@ public class Testfile {
         @Test
         public void testLAUNCHfalse() {
 
-                boolean[] FUV = {false , false, false};
+                boolean[] FUV = { false, false, false };
                 boolean expected = false;
 
                 assertEquals(expected, Main.launch(FUV));
