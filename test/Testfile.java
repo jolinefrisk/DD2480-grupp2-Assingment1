@@ -228,6 +228,54 @@ public class Testfile {
         }
 
         @Test
+          public void testPositiveConditionTwelve() {
+
+                double[] X = {1.0, 5.0, 4.0};
+                double[] Y = {1.0, 3.0, 5.0};
+
+                int numpoints = 3;
+
+                Parameters parameters = new Parameters();
+                parameters.setKPts(1);
+                parameters.setLength1(3);
+                parameters.setLength2(6);
+                
+                assertTrue(ConditionsMet.conditionTwelve(parameters, X, Y, numpoints));
+        }
+        
+        @Test
+          public void testLength1TooLongConditionTwelve() {
+
+                double[] X = {1.0, 5.0, 4.0};
+                double[] Y = {1.0, 3.0, 5.0};
+
+                int numpoints = 3;
+
+                Parameters parameters = new Parameters();
+                parameters.setKPts(1);
+                parameters.setLength1(5);
+                parameters.setLength2(6);
+                
+                assertFalse(ConditionsMet.conditionTwelve(parameters, X, Y, numpoints));
+        }
+
+        @Test
+          public void testLength2TooShortConditionTwelve() {
+
+                double[] X = {1.0, 5.0, 4.0};
+                double[] Y = {1.0, 3.0, 5.0};
+
+                int numpoints = 3;
+
+                Parameters parameters = new Parameters();
+                parameters.setKPts(1);
+                parameters.setLength1(3);
+                parameters.setLength2(5);
+                
+                assertFalse(ConditionsMet.conditionTwelve(parameters, X, Y, numpoints));
+        }
+
+        @Test
           public void testPositiveConditionThirteen() {
 
                 double[] X = {3.0, 5.0, 2.0, 7.0, 4.0};

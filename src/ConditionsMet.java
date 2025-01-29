@@ -44,7 +44,7 @@ public class ConditionsMet {
                 return conditionEleven(parameters);
 
             case 12:
-                return conditionTwelve(parameters);
+                return conditionTwelve(parameters, X, Y, numpoints);
 
             case 13:
                 return conditionThirteen(parameters, X, Y, numpoints);
@@ -343,7 +343,31 @@ public class ConditionsMet {
         return false;
     }
 
-    private boolean conditionTwelve(Parameters parameters) {
+    public static boolean conditionTwelve(Parameters parameters, double[] X, double[] Y, int numpoints) {
+        if (parameters.getLength2() < 0 || numpoints < 3) {
+            return true;
+        }
+
+        double distance = 0;
+        boolean greaterThanLength1 = false;
+        boolean lesserThanLength2 = false;
+
+        for (int i = 0; i < numpoints - (parameters.getKPts() + 1); i++) {
+            distance = distance(X[i], Y[i], X[i + parameters.getKPts() + 1], Y[i + parameters.getKPts() + 1]);
+
+            if (distance > parameters.getLength1()) {
+                greaterThanLength1 = true;
+            }
+
+            if (distance < parameters.getLength2()) {
+                lesserThanLength2 = true;
+            }
+
+            if (greaterThanLength1 && lesserThanLength2) {
+                return true;
+            }
+        }
+
         return false;
     }
 
