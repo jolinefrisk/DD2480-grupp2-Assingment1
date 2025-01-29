@@ -32,7 +32,7 @@ public class ConditionsMet {
                 return conditionSeven(parameters);
 
             case 8:
-                return conditionEight(parameters);
+                return conditionEight(parameters, X, Y, numpoints);
 
             case 9:
                 return conditionNine(parameters, X, Y, numpoints);
@@ -265,8 +265,33 @@ public class ConditionsMet {
         return false;
     }
 
-    private boolean conditionEight(Parameters parameters) {
-        return false;
+    public static boolean conditionEight(Parameters parameters, double [] X, double[] Y, int numpoints) {
+        // Initial conditions
+        if (1 <= parameters.getAPts() && 1 <= parameters.getBPts() && 
+            (parameters.getAPts() + parameters.getBPts()) <= (numpoints - 3) &&
+            numpoints >= 5) {
+
+            boolean inRadius1 = true;
+
+            for (int i = 0; i < numpoints - (parameters.getAPts() + parameters.getBPts() + 1); i++) { 
+
+                if (inRadius1) {
+                    inRadius1 = inRadius(X[i], Y[i], X[i + parameters.getAPts() + 1], 
+                                         Y[i + parameters.getAPts() + 1], 
+                                         X[i + parameters.getAPts() + parameters.getBPts() + 1],
+                                         Y[i + parameters.getAPts() + parameters.getBPts() + 1],
+                                         parameters.getRadius1());
+                }
+
+                if (!inRadius1) {
+                    return true;
+                }
+            }
+            return false;
+            
+        } else {
+            throw new IllegalArgumentException("Invalid parameters!");
+        }
     }
 
     public static boolean conditionNine(Parameters parameters, double[] X, double[] Y, int numpoints) {

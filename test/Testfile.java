@@ -125,6 +125,61 @@ public class Testfile {
         }
 
         @Test
+        public void testPositiveConditionEight() {
+
+                double[] X = {3.0, 5.0, 2.0, 7.0, 4.0};
+                double[] Y = {5.0, 3.0, 1.0, 6.0, 3.0};
+
+                int numpoints = 5;
+
+                Parameters parameters = new Parameters();
+                parameters.setAPts(1);
+                parameters.setBPts(1);
+                parameters.setRadius1(2);
+                
+                assertTrue(ConditionsMet.conditionEight(parameters, X, Y, numpoints));
+        }
+
+        @Test
+        public void testNegativeConditionEight() {
+
+                double[] X = {3.0, 5.0, 2.0, 7.0, 4.0};
+                double[] Y = {5.0, 3.0, 1.0, 6.0, 3.0};
+
+                int numpoints = 5;
+
+                Parameters parameters = new Parameters();
+                parameters.setAPts(1);
+                parameters.setBPts(1);
+                parameters.setRadius1(5);
+                
+                assertFalse(ConditionsMet.conditionEight(parameters, X, Y, numpoints));
+        }
+
+        @Test
+        public void testConditionEightIllegalArgument() {
+
+                double[] X = {3.0, 5.0, 2.0, 7.0, 4.0};
+                double[] Y = {5.0, 3.0, 1.0, 6.0, 3.0};
+
+                int numpoints = 5;
+
+                Parameters parameters = new Parameters();
+                parameters.setAPts(6);
+                parameters.setBPts(4);
+                parameters.setRadius1(5);
+
+                Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                        ConditionsMet.conditionEight(parameters, X, Y, numpoints);
+                });
+
+                String expected = "Invalid parameters!";
+                String message = exception.getMessage();
+
+                assertEquals(expected, message);
+        }
+
+        @Test
         public void testNegativeCondidtionNine() {
 
                 Parameters parameters = new Parameters();
