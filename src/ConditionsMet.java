@@ -38,7 +38,7 @@ public class ConditionsMet {
                 return conditionNine(parameters, X, Y, numpoints);
 
             case 10:
-                return conditionTen(parameters);
+                return conditionTen(parameters, X, Y, numpoints);
 
             case 11:
                 return conditionEleven(parameters);
@@ -307,8 +307,37 @@ public class ConditionsMet {
 
     }
 
-    private boolean conditionTen(Parameters parameters) {
-        return false;
+    public static boolean conditionTen(Parameters parameters, double[] X, double[] Y, int numpoints) {
+        int Epts = parameters.getEPts();
+        int Fpts = parameters.getFPts();
+        if (X.length == numpoints && Y.length == numpoints) {
+            if (numpoints >= 5 && Epts >= 1 && Fpts >= 1
+                    && Epts + Fpts <= numpoints - 3 && parameters.getArea1() > 0) {
+
+                for (int i = 0; i < numpoints - Epts - Fpts - 2; i++) {
+
+                    double x1 = X[i];
+                    double y1 = Y[i];
+                    double x2 = X[i + Epts + 1];
+                    double y2 = Y[i + Epts + 1];
+                    double x3 = X[i + Epts + Fpts + 2];
+                    double y3 = Y[i + Epts + Fpts + 2];
+                    if ((x1 != x2 || y1 != y2) && (x3 != x2 || y3 != y2)) {
+                        double triangle_area = area(x1, y1, x2, y2, x3, y3);
+                        if (triangle_area > parameters.getArea1()) {
+                            return true;
+                        }
+                    }
+
+                }
+                return false;
+            } else {
+                return false;
+            }
+        } else {
+            throw new IllegalArgumentException("The length of X and Y should be equal to numpoints");
+        }
+
     }
 
     private boolean conditionEleven(Parameters parameters) {
