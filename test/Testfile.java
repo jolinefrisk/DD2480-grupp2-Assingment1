@@ -281,6 +281,7 @@ public class Testfile {
                 
 
                 assertFalse(ConditionsMet.conditionFourteen(parameters, X, Y, numpoints));
+        }
 
         @Test
         public void testFUVfalsePUV() {
