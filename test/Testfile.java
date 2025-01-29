@@ -1,7 +1,6 @@
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-
 public class Testfile {
         @Test
         public void testPUMmixedConnectors() {
@@ -63,27 +62,29 @@ public class Testfile {
 
                 assertEquals(expected, message);
         }
+
         @Test
         public void testPositiveConditionOne() {
 
-                double[] X = {0.0, 1.0, 2.0, 3.0};
-                double[] Y = { 0.0, 1.0, 2.0, 3.0};
+                double[] X = { 0.0, 1.0, 2.0, 3.0 };
+                double[] Y = { 0.0, 1.0, 2.0, 3.0 };
                 int numpoints = 4;
                 Parameters parameter = new Parameters();
                 parameter.setLength1(1.0);
 
-                assertTrue(ConditionsMet.conditionOne(parameter, X,Y, numpoints));
+                assertTrue(ConditionsMet.conditionOne(parameter, X, Y, numpoints));
         }
+
         @Test
         public void testNegativeCondidtionOne() {
 
-                double[] X = {0.0, 1.0, 2.0, 3.0};
-                double[] Y = { 0.0, 1.0, 2.0, 3.0};
+                double[] X = { 0.0, 1.0, 2.0, 3.0 };
+                double[] Y = { 0.0, 1.0, 2.0, 3.0 };
                 int numpoints = 4;
                 Parameters parameter = new Parameters();
                 parameter.setLength1(5.0);
 
-                assertTrue(ConditionsMet.conditionOne(parameter, X,Y, numpoints));
+                assertTrue(ConditionsMet.conditionOne(parameter, X, Y, numpoints));
         }
 
         @Test
@@ -124,7 +125,110 @@ public class Testfile {
         }
 
         @Test
-        public void testPositiveConditionFourteen() {
+        public void testNegativeCondidtionNine() {
+
+                Parameters parameters = new Parameters();
+                parameters.setEpsilon(3.1415926535 / 2);
+                parameters.setCPts(1);
+                parameters.setDPts(1);
+
+                double[] X = { 0.0, 1.0, 2.0, 3.0, 4.0 };
+                double[] Y = { 0.0, 2.0, 0.0, -1.0, -2.0 };
+                int numpoints = 5;
+
+                assertFalse(ConditionsMet.conditionNine(parameters, X, Y, numpoints));
+        }
+
+        public void testPositiveCondidtionNine() {
+
+                Parameters parameters = new Parameters();
+                parameters.setEpsilon(0);
+                parameters.setCPts(1);
+                parameters.setDPts(1);
+
+                double[] X = { 0.0, 1.0, 2.0, 3.0, 4.0 };
+                double[] Y = { 0.0, 2.0, 0.0, -1.0, -2.0 };
+                int numpoints = 5;
+
+                assertTrue(ConditionsMet.conditionNine(parameters, X, Y, numpoints));
+        }
+
+        @Test
+        public void testCondidtionNineIllegalArgument() {
+
+                Parameters parameters = new Parameters();
+                parameters.setEpsilon(0);
+                parameters.setCPts(1);
+                parameters.setDPts(1);
+
+                double[] X = { 0.0, 1.0, 2.0, 3.0, 4.0 };
+                double[] Y = { 0.0, 2.0 };
+                int numpoints = 5;
+
+                Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                        ConditionsMet.conditionNine(parameters, X, Y, numpoints);
+                });
+
+                String expected = "The length of X and Y should be equal to numpoints";
+                String message = exception.getMessage();
+
+                assertEquals(expected, message);
+        }
+
+        @Test
+        public void testPositiveCondidtionTen() {
+
+                Parameters parameters = new Parameters();
+                parameters.setArea1(1.0);
+                parameters.setEPts(1);
+                parameters.setFPts(1);
+
+                double[] X = { 0.0, 1.0, 2.0, 3.0, 1.0 };
+                double[] Y = { 0.0, 2.0, 0.0, -1.0, 2.0 };
+                int numpoints = 5;
+
+                assertTrue(ConditionsMet.conditionTen(parameters, X, Y, numpoints));
+        }
+
+        @Test
+        public void testNegativeCondidtionTen() {
+
+                Parameters parameters = new Parameters();
+                parameters.setArea1(1.0);
+                parameters.setEPts(1);
+                parameters.setFPts(1);
+
+                double[] X = { 0.0, 1.0, 0.5, 3.0, 0.25 };
+                double[] Y = { 0.0, 2.0, 0.0, -1.0, 0.5 };
+                int numpoints = 5;
+
+                assertFalse(ConditionsMet.conditionTen(parameters, X, Y, numpoints));
+        }
+
+        @Test
+        public void testCondidtionTenIllegalArgument() {
+
+                Parameters parameters = new Parameters();
+                parameters.setArea1(1.0);
+                parameters.setEPts(1);
+                parameters.setFPts(1);
+
+                double[] X = { 0.0, 1.0, 2.0, 3.0, 4.0 };
+                double[] Y = { 0.0, 2.0 };
+                int numpoints = 5;
+
+                Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                        ConditionsMet.conditionTen(parameters, X, Y, numpoints);
+                });
+
+                String expected = "The length of X and Y should be equal to numpoints";
+                String message = exception.getMessage();
+
+                assertEquals(expected, message);
+        }
+  
+        @Test
+          public void testPositiveConditionFourteen() {
 
                 // Expected area is 4
                 double[] X = {5.0, 9.0, 7.0};
@@ -177,21 +281,86 @@ public class Testfile {
                 
 
                 assertFalse(ConditionsMet.conditionFourteen(parameters, X, Y, numpoints));
-        }
 
         @Test
         public void testFUVfalsePUV() {
 
-                boolean[] PUV = {false , false, false};
+                boolean[] PUV = { false, false, false };
 
                 boolean[][] PUM = {
-                        { true, false, true },
-                        { false, true, true },
-                        { true, true, true }
-        };
+                                { true, false, true },
+                                { false, true, true },
+                                { true, true, true }
+                };
 
-                boolean[] expected = {true, true, true};
+                boolean[] expected = { true, true, true };
 
-                assertEquals(expected, Main.FUV(PUM, PUV));
+                assertArrayEquals(expected, Main.FUV(PUM, PUV));
+        }
+
+        @Test
+        public void testFUVtruePUM() {
+
+                boolean[] PUV = { true, true, true };
+
+                boolean[][] PUM = {
+                                { true, true, true },
+                                { true, true, true },
+                                { true, true, true }
+                };
+
+                boolean[] expected = { true, true, true };
+
+                assertArrayEquals(expected, Main.FUV(PUM, PUV));
+        }
+
+        @Test
+        public void testFUVfalsePUM() {
+
+                boolean[] PUV = { true, true, true };
+
+                boolean[][] PUM = {
+                                { false, false, false },
+                                { false, false, false },
+                                { false, false, false }
+                };
+
+                boolean[] expected = { false, false, false };
+
+                assertArrayEquals(expected, Main.FUV(PUM, PUV));
+        }
+
+        @Test
+        public void testFUVonefalsePUM() {
+
+                boolean[] PUV = { true, true, true };
+
+                boolean[][] PUM = {
+                                { true, true, true },
+                                { true, true, false },
+                                { true, true, true }
+                };
+
+                boolean[] expected = { true, false, true };
+
+                assertArrayEquals(expected, Main.FUV(PUM, PUV));
+        }
+
+        @Test
+        public void testLAUNCHtrue() {
+
+                boolean[] FUV = { true, true, true };
+                boolean expected = true;
+
+                assertEquals(expected, Main.launch(FUV));
+        }
+
+        @Test
+        public void testLAUNCHfalse() {
+
+                boolean[] FUV = { false, false, false };
+                boolean expected = false;
+
+                assertEquals(expected, Main.launch(FUV));
         }
 }

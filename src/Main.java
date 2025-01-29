@@ -98,37 +98,54 @@ public class Main {
 
     // Returns boolean array
 
-    /*FUV - The Final Unlocking Vector
-     * FUV[i] = true if 
-     * PUV[i] = false or all elements in PUM row i: PUM[i][] = true
+    /*FUV()
+     * input:   - PUM[n][n] The Preliminary Unlocking Matrix with n x n elements
+     *          - PUV[n] The Preliminary Unlocking Vector with n elements
+     * 
+     * output:  - FUV[n] - The Final Unlocking Vector with n elements
+     * 
+     * FUV[i] = true if PUV[i] = false or all elements in PUM row i: PUM[i][] = true
      */
     public static boolean[] FUV(boolean[][] PUM,boolean[] PUV) {
-        int n = PUV.length;
+        int n = PUM.length;
         boolean[] FUV_vector = new boolean[n];
 
-        for (int i = 0; i < n; i++){
-            if (PUV[i] == false){
-                FUV_vector[i] = true;
-                continue;
-            }  
-
-            boolean no_false = true;
-            for (int el = 0; el < n; el++){
-                if(!PUM[i][el]){
-                    no_false = false;
-                    break;
+        if (n == PUV.length) {
+            for (int i = 0; i < n; i++){
+                if (PUV[i] == false){
+                    FUV_vector[i] = true;
+                    continue;
+                }  
+    
+                boolean no_false = true;
+                for (int el = 0; el < n; el++){
+                    if(!PUM[i][el]){
+                        no_false = false;
+                        break;
+                    }
                 }
+    
+                FUV_vector[i] = no_false;
             }
-
-            FUV_vector[i] = no_false;
+        } else {
+            throw new IllegalArgumentException("The PUV should be a n x 1 vector, where n is the length of CMV");
         }
+        
         return FUV_vector;
     }
 
 
     public static boolean launch(boolean[] FUV) {
-
-        return false;
+        int n = FUV.length;
+        boolean no_false = true;
+        for (int i = 0; i < n; i++){
+            if(!FUV[i]){
+                no_false = false;
+                break;
+            }
+        }
+        boolean launch_decision = no_false;
+        return launch_decision;
     }
 
     public static void main(String[] args) {
