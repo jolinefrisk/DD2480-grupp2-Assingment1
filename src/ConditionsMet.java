@@ -47,7 +47,7 @@ public class ConditionsMet {
                 return conditionTwelve(parameters);
 
             case 13:
-                return conditionThirteen(parameters);
+                return conditionThirteen(parameters, X, Y, numpoints);
 
             case 14:
                 return conditionFourteen(parameters, X, Y, numpoints);
@@ -347,7 +347,33 @@ public class ConditionsMet {
         return false;
     }
 
-    private boolean conditionThirteen(Parameters parameters) {
+    public static boolean conditionThirteen(Parameters parameters, double[] X, double[] Y, int numpoints) {
+        // Initial conditions
+        if (parameters.getRadius2() < 0 || numpoints < 5) {
+            return false;
+        }  
+
+        boolean inRadius1 = true;
+        boolean inRadius2 = false;
+
+        for (int i = 0; i < numpoints - (parameters.getAPts() + parameters.getBPts()); i++) { 
+
+            inRadius1 = inRadius(X[i], Y[i], X[i + parameters.getAPts()], 
+                                 Y[i + parameters.getAPts()], 
+                                 X[i + parameters.getAPts() + parameters.getBPts()],
+                                 Y[i + parameters.getAPts() + parameters.getBPts()],
+                                 parameters.getRadius1());
+                
+            inRadius2 = inRadius(X[i], Y[i], X[i + parameters.getAPts()], 
+                                 Y[i + parameters.getAPts()], 
+                                 X[i + parameters.getAPts() + parameters.getBPts()],
+                                 Y[i + parameters.getAPts() + parameters.getBPts()],
+                                 parameters.getRadius2());
+
+            if (!inRadius1 && inRadius2) {
+                return true;
+            }
+        }
         return false;
     }
 
