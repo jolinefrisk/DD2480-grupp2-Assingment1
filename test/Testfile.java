@@ -226,6 +226,61 @@ public class Testfile {
 
                 assertEquals(expected, message);
         }
+  
+        @Test
+          public void testPositiveConditionFourteen() {
+
+                // Expected area is 4
+                double[] X = {5.0, 9.0, 7.0};
+                double[] Y = {5.0, 5.0, 7.0};
+
+                int numpoints = 3;
+
+                Parameters parameters = new Parameters();
+                parameters.setEPts(1);
+                parameters.setFPts(1);
+                parameters.setArea1(2);
+                parameters.setArea2(10);
+                
+                assertTrue(ConditionsMet.conditionFourteen(parameters, X, Y, numpoints));
+        }
+
+        @Test
+        public void testFalseArea1ConditionFourteen() {
+
+                // Expected area is 4
+                double[] X = {5.0, 9.0, 7.0};
+                double[] Y = {5.0, 5.0, 7.0};
+
+                int numpoints = 3;
+
+                Parameters parameters = new Parameters();
+                parameters.setEPts(1);
+                parameters.setFPts(1);
+                parameters.setArea1(5);
+                parameters.setArea2(10);
+                
+
+                assertFalse(ConditionsMet.conditionFourteen(parameters, X, Y, numpoints));
+        }
+
+        @Test
+        public void testFalseArea2ConditionFourteen() {
+
+                // Expected area is 4
+                double[] X = {5.0, 9.0, 7.0};
+                double[] Y = {5.0, 5.0, 7.0};
+
+                int numpoints = 3;
+
+                Parameters parameters = new Parameters();
+                parameters.setEPts(1);
+                parameters.setFPts(1);
+                parameters.setArea1(2);
+                parameters.setArea2(3);
+                
+
+                assertFalse(ConditionsMet.conditionFourteen(parameters, X, Y, numpoints));
 
         @Test
         public void testFUVfalsePUV() {
