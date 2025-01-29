@@ -382,17 +382,21 @@ public class ConditionsMet {
 
         for (int i = 0; i < numpoints - (parameters.getAPts() + parameters.getBPts() + 1); i++) { 
 
-            inRadius1 = inRadius(X[i], Y[i], X[i + parameters.getAPts() + 1], 
-                                 Y[i + parameters.getAPts() + 1], 
-                                 X[i + parameters.getAPts() + parameters.getBPts() + 1],
-                                 Y[i + parameters.getAPts() + parameters.getBPts() + 1],
-                                 parameters.getRadius1());
-                
-            inRadius2 = inRadius(X[i], Y[i], X[i + parameters.getAPts() + 1], 
-                                 Y[i + parameters.getAPts() + 1], 
-                                 X[i + parameters.getAPts() + parameters.getBPts() + 1],
-                                 Y[i + parameters.getAPts() + parameters.getBPts() + 1],
-                                 parameters.getRadius2());
+            if (inRadius1) {
+                inRadius1 = inRadius(X[i], Y[i], X[i + parameters.getAPts() + 1], 
+                                     Y[i + parameters.getAPts() + 1], 
+                                     X[i + parameters.getAPts() + parameters.getBPts() + 1],
+                                     Y[i + parameters.getAPts() + parameters.getBPts() + 1],
+                                     parameters.getRadius1());
+            }
+            
+            if (!inRadius2) {
+                inRadius2 = inRadius(X[i], Y[i], X[i + parameters.getAPts() + 1], 
+                                     Y[i + parameters.getAPts() + 1], 
+                                     X[i + parameters.getAPts() + parameters.getBPts() + 1],
+                                     Y[i + parameters.getAPts() + parameters.getBPts() + 1],
+                                     parameters.getRadius2());
+            }
 
             if (!inRadius1 && inRadius2) {
                 return true;

@@ -295,7 +295,7 @@ public class Testfile {
         @Test
           public void testRadius1FitsConditionThirteen() {
 
-                double[] X = {3.0, 1.0, 5.0, 7.0, 4.0};
+                double[] X = {3.0, 5.0, 2.0, 7.0, 4.0};
                 double[] Y = {5.0, 2.0, 3.0, 6.0, 3.0};
 
                 int numpoints = 5;
@@ -303,7 +303,7 @@ public class Testfile {
                 Parameters parameters = new Parameters();
                 parameters.setAPts(1);
                 parameters.setBPts(1);
-                parameters.setRadius1(3);
+                parameters.setRadius1(4);
                 parameters.setRadius2(5);
                 
                 assertFalse(ConditionsMet.conditionThirteen(parameters, X, Y, numpoints));
