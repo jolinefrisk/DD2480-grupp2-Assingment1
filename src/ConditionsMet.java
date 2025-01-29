@@ -48,7 +48,7 @@ public class ConditionsMet {
                 return conditionThirteen(parameters);
 
             case 14:
-                return conditionFourteen(parameters, numpoints);
+                return conditionFourteen(parameters, X, Y, numpoints);
 
             // Behöver fixa en faktiskt error hantering och inte bara return false här
             default:
@@ -263,7 +263,7 @@ public class ConditionsMet {
         return false;
     }
 
-    private boolean conditionFourteen(Parameters parameters, double[] X, double[] Y, int numpoints) {
+    public static boolean conditionFourteen(Parameters parameters, double[] X, double[] Y, int numpoints) {
         // Initial conditions
         if (parameters.getArea2() <= 0 || numpoints >= 5) {
             return false;
@@ -272,11 +272,11 @@ public class ConditionsMet {
         boolean greaterThanArea1 = false;
         boolean lesserThanArea2 = false;
 
-        for (int i = 0; i <= numpoints - (parameters.getEPts() + parameters.getFPts()); i++) {
+        for (int i = 0; i < numpoints - (parameters.getEPts() + parameters.getFPts()); i++) {
             double area = area(X[i], Y[i], X[i + parameters.getEPts()], 
-                               Y[i + parameters.EPts()], 
-                               X[i + parameters.EPts() + parameters.FPts()], 
-                               Y[i + parameters.Epts() + parameters.FPts()]);
+                               Y[i + parameters.getEPts()], 
+                               X[i + parameters.getEPts() + parameters.getFPts()], 
+                               Y[i + parameters.getEPts() + parameters.getFPts()]);
 
             if (area > parameters.getArea1()) {
                 greaterThanArea1 = true;
