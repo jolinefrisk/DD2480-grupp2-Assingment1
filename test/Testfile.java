@@ -109,10 +109,58 @@ public class Testfile {
                         { true, false, true },
                         { false, true, true },
                         { true, true, true }
-        };
+                };
 
                 boolean[] expected = {true, true, true};
 
-                assertEquals(expected, Main.FUV(PUM, PUV));
+                assertArrayEquals(expected, Main.FUV(PUM, PUV));
+        }
+
+        @Test
+        public void testFUVtruePUM() {
+
+                boolean[] PUV = {true , true, true};
+
+                boolean[][] PUM = {
+                        { true, true, true },
+                        { true, true, true },
+                        { true, true, true }
+                };
+
+                boolean[] expected = {true, true, true};
+
+                assertArrayEquals(expected, Main.FUV(PUM, PUV));
+        }
+
+        @Test
+        public void testFUVfalsePUM() {
+
+                boolean[] PUV = {true , true, true};
+
+                boolean[][] PUM = {
+                        { false, false, false },
+                        { false, false, false },
+                        { false, false, false }
+                };
+
+                boolean[] expected = {false, false, false};
+
+                assertArrayEquals(expected, Main.FUV(PUM, PUV));
+        }
+
+        @Test
+        public void testFUVonefalsePUM() {
+
+                boolean[] PUV = {true , true, true};
+
+                boolean[][] PUM = {
+                        { true, true, true },
+                        { true, true, false },
+                        { true, true, true }
+                };
+
+                boolean[] expected = {true, false, true};
+
+                assertArrayEquals(expected, Main.FUV(PUM, PUV));
         }
 }
