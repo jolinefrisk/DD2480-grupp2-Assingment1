@@ -69,7 +69,8 @@ public class Testfile {
                 double[] X = {0.0, 1.0, 2.0, 3.0};
                 double[] Y = { 0.0, 1.0, 2.0, 3.0};
                 int numpoints = 4;
-                int parameter = 2;
+                Parameters parameter = new Parameters();
+                parameter.setLength1(1.0);
 
                 assertTrue(ConditionsMet.conditionOne(parameter, X,Y, numpoints));
         }
@@ -79,7 +80,8 @@ public class Testfile {
                 double[] X = {0.0, 1.0, 2.0, 3.0};
                 double[] Y = { 0.0, 1.0, 2.0, 3.0};
                 int numpoints = 4;
-                int parameter = 1;
+                Parameters parameter = new Parameters();
+                parameter.setLength1(5.0);
 
                 assertTrue(ConditionsMet.conditionOne(parameter, X,Y, numpoints));
         }
