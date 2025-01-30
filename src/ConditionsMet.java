@@ -274,22 +274,29 @@ public class ConditionsMet {
         /*
          * 
          */
-            if (numpoints < 3) {
-                return false;
-            }
+        if (numpoints < 3) {
+            return false;
+        }
 
-            double DIST = parameters.getDist();
+        int n_pts = parameters.getNPts();
 
-            double start_X = X[0];
-            double start_Y = Y[0];
+        if (n_pts > numpoints){
+            return false;
+        }
 
-            int end = numpoints-1;
+        double DIST = parameters.getDist();
+
+        for (int i = 0; i < numpoints - n_pts+1; i++){
+            double start_X = X[i];
+            double start_Y = Y[i];
+
+            int end = i+(n_pts-1);
             double end_X = X[end];
             double end_Y = Y[end];
 
-            for(int i=1; i<end-1; i++){
-                double data_point_X = X[i];
-                double data_point_Y = Y[i];
+            for(int j=i+1; j<end-1; j++){
+                double data_point_X = X[j];
+                double data_point_Y = Y[j];
 
                 if (start_X == end_X && start_Y == end_Y) {
                     double distance_dp = distance(data_point_X, data_point_Y, end_X, end_Y);
@@ -304,6 +311,7 @@ public class ConditionsMet {
                     }
                 }
             }
+        }
         return false;
     }
 
