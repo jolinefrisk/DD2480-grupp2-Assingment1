@@ -64,29 +64,18 @@ public class Testfile {
         }
 
         @Test
-        public void testPositiveConditionZero() {
+        public void testVectorProjection(){
+                //public static double[] vectorProjection(double x1, double y1, double x2, double y2)
+                double x1 = 1;
+                double y1 = 2;
+                double x2 = 2;
+                double y2 = 2;
 
-                double[] X = {0.0, 1.0, 2.0, 3.0};
-                double[] Y = { 0.0, 1.0, 2.0, 3.0};
-                int numpoints = 4;
-                Parameters parameter = new Parameters();
-                parameter.setLength1(0.0);
-
-                assertTrue(ConditionsMet.conditionZero(parameter, X,Y, numpoints));
+                double[] expected = {1.5, 1.5};
+                assertArrayEquals(expected, ConditionsMet.vectorProjection( x1,  y1,  x2, y2));
         }
+
         @Test
-        public void testNegativeCondidtionZero() {
-
-                double[] X = {1, 1, 1, 1}; 
-                double[] Y = {2, 2, 2, 2};
-                int numpoints = 4;
-                Parameters parameter = new Parameters();
-                parameter.setLength1(0.0);
-
-                assertFalse(ConditionsMet.conditionZero(parameter, X,Y, numpoints));
-        }
-        @Test
-
         public void testPositiveConditionOne() {
 
                 double[] X = { 0.0, 1.0, 2.0, 3.0 };
@@ -213,7 +202,17 @@ public class Testfile {
 
                 assertEquals(expected, message);
         }
+        public void testPositiveCondidtionSix() {
 
+                Parameters parameters = new Parameters();
+                parameters.setDist(1.0);
+
+                double[] X = { 0.0, 1.0, 2.0, 1.0 };
+                double[] Y = { 0.0, 1.0, 3.0 ,2.0 };
+                int numpoints = 4;
+
+                assertTrue(ConditionsMet.conditionSix(parameters, X, Y, numpoints));
+        }
         @Test
         public void testPositiveConditionSeven() {
 

@@ -26,7 +26,7 @@ public class ConditionsMet {
                 return conditionFive(X, numpoints);
 
             case 6:
-                return conditionSix(parameters);
+                return conditionSix(parameters, X, Y,numpoints);
 
             case 7:
                 return conditionSeven(parameters, X, Y, numpoints);
@@ -97,9 +97,25 @@ public class ConditionsMet {
         return circumRadius <= RADIUS1;
     }
 
-    public static boolean conditionZero(Parameters parameters, double[] x, double[] y, int numpoints) {
-        /*input param Lenght 1 x,y vectir and numpoint
-         * returns true if there exists at least one set of two consecutive data points such that the distance between them is greater than LENGTH1
+    public static double[] vectorProjection(double x1, double y1, double x2, double y2) {
+            /*project vector 1 onto vector 2 
+             * returns the projection vector as an arry of [x,y]
+            */
+
+            double scalar = (x1*x2 + y1*y2) / (x2*x2 + y2*y2);
+            
+            double projectionX = scalar * x2;
+            double projectionY = scalar * y2;
+            double[] projectionVector = {projectionX, projectionY};
+
+        return projectionVector;
+    }
+
+    private boolean conditionZero(Parameters parameters, double[] x, double[] y, int numpoints) {
+        /*
+         * input param Lenght 1 x,y vectir and numpoint
+         * returns true if there exists at least one set of two consecutive data points
+         * such that the distance between them is greater than LENGTH1
          * else return false
          */
         if (numpoints < 2) {
@@ -254,7 +270,40 @@ public class ConditionsMet {
         return false;
     }
 
-    private boolean conditionSix(Parameters parameters) {
+    public static boolean conditionSix(Parameters parameters, double[] X, double[] Y, int numpoints) {
+        /*
+         * 
+         */
+            if (numpoints < 3) {
+                return false;
+            }
+
+            double DIST = parameters.getDist();
+
+            double start_X = X[0];
+            double start_Y = Y[0];
+
+            int end = numpoints-1;
+            double end_X = X[end];
+            double end_Y = Y[end];
+
+            for(int i=1; i<end-1; i++){
+                double data_point_X = X[i];
+                double data_point_Y = Y[i];
+
+                if (start_X == end_X && start_Y == end_Y) {
+                    double distance_dp = distance(data_point_X, data_point_Y, end_X, end_Y);
+                    if (distance_dp > DIST) {
+                        return true;
+                    }
+                } else {
+                    double[] projectionVector = vectorProjection(start_X, start_Y, end_X, end_Y);
+                    double distance_dp = distance(data_point_X, data_point_Y, projectionVector[0], projectionVector[1]);
+                    if (distance_dp > DIST) {
+                        return true;
+                    }
+                }
+            }
         return false;
     }
 
