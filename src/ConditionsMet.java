@@ -407,7 +407,7 @@ public class ConditionsMet {
         int Fpts = parameters.getFPts();
         if (X.length == numpoints && Y.length == numpoints) {
             if (numpoints >= 5 && Epts >= 1 && Fpts >= 1
-                    && Epts + Fpts <= numpoints - 3 && parameters.getArea1() > 0) {
+                    && Epts + Fpts <= numpoints - 3 && parameters.getArea1() >= 0) {
 
                 for (int i = 0; i < numpoints - Epts - Fpts - 2; i++) {
 
