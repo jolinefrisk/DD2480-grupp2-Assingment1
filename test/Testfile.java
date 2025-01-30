@@ -213,6 +213,7 @@ public class Testfile {
 
                 assertTrue(ConditionsMet.conditionSix(parameters, X, Y, numpoints));
         }
+        
         @Test
         public void testPositiveConditionSeven() {
 
