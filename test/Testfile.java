@@ -74,6 +74,51 @@ public class Testfile {
                 double[] expected = {1.5, 1.5};
                 assertArrayEquals(expected, ConditionsMet.vectorProjection( x1,  y1,  x2, y2));
         }
+        @Test
+        public void testPositiveCondidtionZero() {
+
+                double[] X = { 0.0, 1.0, 2.0, 3.0 };
+                double[] Y = { 0.0, 1.0, 2.0, 3.0 };
+                int numpoints = 4;
+                Parameters parameter = new Parameters();
+                parameter.setLength1(1.0);
+
+                assertTrue(ConditionsMet.conditionZero(parameter, X, Y, numpoints));
+        }
+        
+        
+        @Test
+        public void testNegativeCondidtionZero() {
+
+                double[] X = {1.0, 1.5, 0.5, 3.0};
+                double[] Y = { 1.0, 1.5, 0.5 , 1.0};
+                int numpoints = 4;
+                Parameters parameter = new Parameters();
+                parameter.setLength1(1.0);
+
+                assertFalse(ConditionsMet.conditionZero(parameter, X,Y, numpoints));
+        }
+
+        @Test
+        public void  testCondidtionZeroIllegalArgument(){
+        
+                double[] X = {1.0, 1.5, 0.5, 3.0};
+                double[] Y = { 1.0, 1.5, 0.5 , 1.0};
+                int numpoints = 0;
+
+                Parameters parameter = new Parameters();
+                parameter.setLength1(1.0);
+                String expected= "The number of points should be at least 2";
+                Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                        ConditionsMet.conditionZero(parameter, X, Y, numpoints);
+                });
+
+                String message = exception.getMessage();
+
+                assertEquals(expected, message);
+
+
+        }
 
         @Test
         public void testPositiveConditionOne() {
@@ -98,6 +143,10 @@ public class Testfile {
 
                 assertTrue(ConditionsMet.conditionOne(parameter, X,Y, numpoints));
         }
+
+
+
+
         @Test
         public void testPositiveCondidtionTwo() {
                 double[] X = {0, 1, 1, 3, 4}; 
