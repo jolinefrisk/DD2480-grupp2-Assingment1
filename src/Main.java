@@ -31,7 +31,7 @@ public class Main {
     // PARAMETERS = 0; // Parameters for LIC, fix later
 
     // OUTPUT VARIABLE
-    public static boolean DECIDE() {
+    public static boolean DECIDE(Parameters parameters) {
         /*
          * Call upon CMV, PUM, FUV, launch methods
          * with global variable as input
@@ -41,7 +41,14 @@ public class Main {
          * FUV uses CMV and PUM return values as inputs
          */
 
-        return false;
+        boolean[] CMV = CMV(parameters, X, Y, NUMPOINTS);
+
+        boolean[][] PUM = PUM(LCM, CMV);
+
+        boolean[] FUV = FUV(PUM, PUV);
+
+        return launch(FUV);
+
     }
 
     /*
@@ -148,9 +155,11 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Main main = new Main();
+        Parameters parameters = new Parameters();
 
-        main.DECIDE();
+        // ASSIGN VALUES TO PARAMETERS HERE
+
+        Main.DECIDE(parameters);
     }
 
 }

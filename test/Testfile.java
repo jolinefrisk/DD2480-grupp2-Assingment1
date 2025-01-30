@@ -1,4 +1,7 @@
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.beans.Transient;
+
 import org.junit.jupiter.api.Test;
 
 public class Testfile {
@@ -690,5 +693,64 @@ public class Testfile {
                 boolean expected = false;
 
                 assertEquals(expected, Main.launch(FUV));
+        }
+
+        @Test
+        public void testDECIDETrue() {
+                Parameters parameters = new Parameters();
+                parameters.setLength1(5.0);
+                parameters.setRadius1(2.0);
+                parameters.setEpsilon(0.1);
+                parameters.setArea1(0);
+                parameters.setQPts(3);
+                parameters.setQuads(2);
+                parameters.setDist(2);
+                parameters.setNPts(1);
+                parameters.setKPts(1);
+                parameters.setAPts(1);
+                parameters.setBPts(1);
+                parameters.setCPts(1);
+                parameters.setDPts(1);
+                parameters.setEPts(1);
+                parameters.setFPts(1);
+                parameters.setGPts(1);
+                parameters.setLength2(5);
+                parameters.setArea2(5);
+
+                CONNECTORS[][] LCM =  Main.LCM;
+
+                DECIDE(parameters);
+        }
+
+        @Test
+        public void testDECIDEFalse() {
+                Parameters parameters = new Parameters();
+                parameters.setLength1(5.0);
+                parameters.setRadius1(2.0);
+                parameters.setEpsilon(0.1);
+                parameters.setArea1(0);
+                parameters.setQPts(3);
+                parameters.setQuads(2);
+                parameters.setDist(2);
+                parameters.setNPts(1);
+                parameters.setKPts(1);
+                parameters.setAPts(1);
+                parameters.setBPts(1);
+                parameters.setCPts(1);
+                parameters.setDPts(1);
+                parameters.setEPts(1);
+                parameters.setFPts(1);
+                parameters.setGPts(1);
+                parameters.setLength2(5);
+                parameters.setArea2(5);
+
+                CONNECTORS[][] LCM =  Main.LCM;
+
+                DECIDE(parameters);
+        }
+
+        @Test
+        public void testDECIDEFalse() {
+
         }
 }
