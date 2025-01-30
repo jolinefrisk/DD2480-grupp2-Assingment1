@@ -371,6 +371,19 @@ public class Testfile {
         }
 
         @Test
+        public void testPositiveCondidtionSix() {
+
+                Parameters parameters = new Parameters();
+                parameters.setDist(1.0);
+
+                double[] X = { 0.0, 1.0, 2.0, 1.0 };
+                double[] Y = { 0.0, 1.0, 3.0 ,2.0 };
+                int numpoints = 4;
+
+                assertTrue(ConditionsMet.conditionSix(parameters, X, Y, numpoints));
+        }
+
+        @Test
         public void testNegativeCondidtionNine() {
 
                 Parameters parameters = new Parameters();
