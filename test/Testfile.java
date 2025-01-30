@@ -251,16 +251,93 @@ public class Testfile {
 
                 assertEquals(expected, message);
         }
+
+        @Test
         public void testPositiveCondidtionSix() {
 
                 Parameters parameters = new Parameters();
                 parameters.setDist(1.0);
-
+                parameters.setNPts(3);
+                
                 double[] X = { 0.0, 1.0, 2.0, 1.0 };
                 double[] Y = { 0.0, 1.0, 3.0 ,2.0 };
                 int numpoints = 4;
 
                 assertTrue(ConditionsMet.conditionSix(parameters, X, Y, numpoints));
+        }
+
+        @Test
+        public void testNegativeCondidtionSix() {
+
+                Parameters parameters = new Parameters();
+                parameters.setDist(2.0);
+                parameters.setNPts(3);
+
+                double[] X = { 0.0, 1.0, 2.0, 1.0 };
+                double[] Y = { 0.0, 1.0, 3.0 ,2.0 };
+                int numpoints = 4;
+
+                assertFalse(ConditionsMet.conditionSix(parameters, X, Y, numpoints));
+        }
+
+        @Test
+        public void testCondidtionSixIllegalArgumentNPtsLength() {
+
+                Parameters parameters = new Parameters();
+                parameters.setNPts(8);
+
+                double[] X = { 0.0, 1.0, 2.0, 3.0, 4.0 };
+                double[] Y = { 0.0, 2.0, 0.0, 1.0, 2.0 };
+                int numpoints = 5;
+
+                Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                        ConditionsMet.conditionSix(parameters, X, Y, numpoints);
+                });
+
+                String expected = "NPts should be equal to or less than numpoints";
+                String message = exception.getMessage();
+
+                assertEquals(expected, message);
+        }
+
+        @Test
+        public void testCondidtionSixIllegalArgumentXYLength() {
+
+                Parameters parameters = new Parameters();
+                parameters.setNPts(3);
+
+                double[] X = { 0.0, 1.0, 2.0, 3.0, 4.0 };
+                double[] Y = { 0.0, 2.0, 0.0};
+                int numpoints = 5;
+
+                Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                        ConditionsMet.conditionSix(parameters, X, Y, numpoints);
+                });
+
+                String expected = "X and Y should be the same length as numpoints";
+                String message = exception.getMessage();
+
+                assertEquals(expected, message);
+        }
+
+        @Test
+        public void testCondidtionSixIllegalArgumentNumpointsLT3() {
+
+                Parameters parameters = new Parameters();
+                parameters.setNPts(2);
+
+                double[] X = { 0.0, 1.0, 2.0, 3.0, 4.0 };
+                double[] Y = { 0.0, 2.0, 0.0, 1.0, 2.0 };
+                int numpoints = 2;
+
+                Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                        ConditionsMet.conditionSix(parameters, X, Y, numpoints);
+                });
+
+                String expected = "The number of points should be at least 3";
+                String message = exception.getMessage();
+
+                assertEquals(expected, message);
         }
         
         @Test
@@ -370,18 +447,6 @@ public class Testfile {
                 assertEquals(expected, message);
         }
 
-        @Test
-        public void testPositiveCondidtionSix() {
-
-                Parameters parameters = new Parameters();
-                parameters.setDist(1.0);
-
-                double[] X = { 0.0, 1.0, 2.0, 1.0 };
-                double[] Y = { 0.0, 1.0, 3.0 ,2.0 };
-                int numpoints = 4;
-
-                assertTrue(ConditionsMet.conditionSix(parameters, X, Y, numpoints));
-        }
 
         @Test
         public void testNegativeCondidtionNine() {

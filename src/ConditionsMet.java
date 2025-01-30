@@ -271,17 +271,19 @@ public class ConditionsMet {
     }
 
     public static boolean conditionSix(Parameters parameters, double[] X, double[] Y, int numpoints) {
-        /*
-         * 
-         */
-        if (numpoints < 3) {
-            return false;
+
+         if (numpoints < 3) {
+            throw new IllegalArgumentException("The number of points should be at least 3");
+        }
+
+        if (X.length != numpoints || Y.length != numpoints){
+            throw new IllegalArgumentException("X and Y should be the same length as numpoints");
         }
 
         int n_pts = parameters.getNPts();
 
         if (n_pts > numpoints){
-            return false;
+            throw new IllegalArgumentException("NPts should be equal to or less than numpoints");
         }
 
         double DIST = parameters.getDist();
