@@ -1,8 +1,17 @@
 # DECIDE() program
 DD2480, group 2, Assignment 1, DECIDE() program
 
-Description of program
+## Purpose
+The DECIDE() function determines if an interceptor should be launched based upon input radar tracking information. The DECIDE() function is a part of a hypothetical anti-ballistic missile system called the Launch Interceptor Program.
 
+## DECIDE() I/O
+__Input__: 
+
+__Output__: Final launch decision (boolean)
+
+## Code logic
+
+## Essence standard evaluation
 Property:  You have assessed and documented (in one paragraph) your way of working (p. 58 in the Essence standardLinks to an external site. v1.2) by evaluating the checklist on p. 60: In what state are you in? Why? What are obstacles to reach the next state?
 Checklist:
 1.  Principles Established
