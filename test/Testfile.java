@@ -91,8 +91,8 @@ public class Testfile {
         @Test
         public void testNegativeCondidtionZero() {
 
-                double[] X = {1, 1, 1, 1}; 
-                double[] Y = {2, 2, 2, 2};        
+                double[] X = { 1, 1, 1, 1 };
+                double[] Y = { 2, 2, 2, 2 };
                 int numpoints = 4;
                 Parameters parameter = new Parameters();
                 parameter.setLength1(1.0);
@@ -968,7 +968,7 @@ public class Testfile {
         }
 
         @Test
-        public void testCMVUnvalid() {
+        public void testCMVInvalid() {
 
                 double[] X = {};
                 double[] Y = {};
