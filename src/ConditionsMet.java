@@ -29,10 +29,10 @@ public class ConditionsMet {
                 return conditionSix(parameters);
 
             case 7:
-                return conditionSeven(parameters);
+                return conditionSeven(parameters, X, Y, numpoints);
 
             case 8:
-                return conditionEight(parameters);
+                return conditionEight(parameters, X, Y, numpoints);
 
             case 9:
                 return conditionNine(parameters, X, Y, numpoints);
@@ -44,10 +44,10 @@ public class ConditionsMet {
                 return conditionEleven(parameters, X, numpoints);
 
             case 12:
-                return conditionTwelve(parameters);
+                return conditionTwelve(parameters, X, Y, numpoints);
 
             case 13:
-                return conditionThirteen(parameters);
+                return conditionThirteen(parameters, X, Y, numpoints);
 
             case 14:
                 return conditionFourteen(parameters, X, Y, numpoints);
@@ -261,12 +261,52 @@ public class ConditionsMet {
         return false;
     }
 
-    private boolean conditionSeven(Parameters parameters) {
+    public static boolean conditionSeven(Parameters parameters, double[] X, double[] Y, int numpoints) {
+        if (1 <= parameters.getKPts() && parameters.getKPts() <= (numpoints - 2) && numpoints >= 3) {
+
+            double distance = 0;
+
+            for (int i = 0; i < numpoints - (parameters.getKPts() + 1); i++) {
+                distance = distance(X[i], Y[i], X[i + parameters.getKPts() + 1], Y[i + parameters.getKPts() + 1]);
+
+                if (distance > parameters.getLength1()) {
+                    return true;
+                }
+            }
+        } else {
+            throw new IllegalArgumentException("Invalid parameters!");
+        }
+
         return false;
     }
 
-    private boolean conditionEight(Parameters parameters) {
-        return false;
+    public static boolean conditionEight(Parameters parameters, double [] X, double[] Y, int numpoints) {
+        // Initial conditions
+        if (1 <= parameters.getAPts() && 1 <= parameters.getBPts() && 
+            (parameters.getAPts() + parameters.getBPts()) <= (numpoints - 3) &&
+            numpoints >= 5) {
+
+            boolean inRadius1 = true;
+
+            for (int i = 0; i < numpoints - (parameters.getAPts() + parameters.getBPts() + 1); i++) { 
+
+                if (inRadius1) {
+                    inRadius1 = inRadius(X[i], Y[i], X[i + parameters.getAPts() + 1], 
+                                         Y[i + parameters.getAPts() + 1], 
+                                         X[i + parameters.getAPts() + parameters.getBPts() + 1],
+                                         Y[i + parameters.getAPts() + parameters.getBPts() + 1],
+                                         parameters.getRadius1());
+                }
+
+                if (!inRadius1) {
+                    return true;
+                }
+            }
+            return false;
+            
+        } else {
+            throw new IllegalArgumentException("Invalid parameters!");
+        }
     }
 
     public static boolean conditionNine(Parameters parameters, double[] X, double[] Y, int numpoints) {
@@ -363,29 +403,82 @@ public class ConditionsMet {
         
     }
 
+    public static boolean conditionTwelve(Parameters parameters, double[] X, double[] Y, int numpoints) {
+        if (parameters.getLength2() < 0 || numpoints < 3) {
+            return true;
+        }
 
-    private boolean conditionTwelve(Parameters parameters) {
+        double distance = 0;
+        boolean greaterThanLength1 = false;
+        boolean lesserThanLength2 = false;
+
+        for (int i = 0; i < numpoints - (parameters.getKPts() + 1); i++) {
+            distance = distance(X[i], Y[i], X[i + parameters.getKPts() + 1], Y[i + parameters.getKPts() + 1]);
+
+            if (distance > parameters.getLength1()) {
+                greaterThanLength1 = true;
+            }
+
+            if (distance < parameters.getLength2()) {
+                lesserThanLength2 = true;
+            }
+
+            if (greaterThanLength1 && lesserThanLength2) {
+                return true;
+            }
+        }
+  
         return false;
     }
 
-    private boolean conditionThirteen(Parameters parameters) {
+    public static boolean conditionThirteen(Parameters parameters, double[] X, double[] Y, int numpoints) {
+        // Initial conditions
+        if (parameters.getRadius2() < 0 || numpoints < 5) {
+            return false;
+        }  
+
+        boolean inRadius1 = true;
+        boolean inRadius2 = false;
+
+        for (int i = 0; i < numpoints - (parameters.getAPts() + parameters.getBPts() + 1); i++) { 
+
+            if (inRadius1) {
+                inRadius1 = inRadius(X[i], Y[i], X[i + parameters.getAPts() + 1], 
+                                     Y[i + parameters.getAPts() + 1], 
+                                     X[i + parameters.getAPts() + parameters.getBPts() + 1],
+                                     Y[i + parameters.getAPts() + parameters.getBPts() + 1],
+                                     parameters.getRadius1());
+            }
+            
+            if (!inRadius2) {
+                inRadius2 = inRadius(X[i], Y[i], X[i + parameters.getAPts() + 1], 
+                                     Y[i + parameters.getAPts() + 1], 
+                                     X[i + parameters.getAPts() + parameters.getBPts() + 1],
+                                     Y[i + parameters.getAPts() + parameters.getBPts() + 1],
+                                     parameters.getRadius2());
+            }
+
+            if (!inRadius1 && inRadius2) {
+                return true;
+            }
+        }
         return false;
     }
 
     public static boolean conditionFourteen(Parameters parameters, double[] X, double[] Y, int numpoints) {
         // Initial conditions
-        if (parameters.getArea2() <= 0 || numpoints >= 5) {
+        if (parameters.getArea2() <= 0 || numpoints < 5) {
             return false;
         }  
 
         boolean greaterThanArea1 = false;
         boolean lesserThanArea2 = false;
 
-        for (int i = 0; i < numpoints - (parameters.getEPts() + parameters.getFPts()); i++) {
-            double area = area(X[i], Y[i], X[i + parameters.getEPts()], 
-                               Y[i + parameters.getEPts()], 
-                               X[i + parameters.getEPts() + parameters.getFPts()], 
-                               Y[i + parameters.getEPts() + parameters.getFPts()]);
+        for (int i = 0; i < numpoints - (parameters.getEPts() + parameters.getFPts() + 1); i++) {
+            double area = area(X[i], Y[i], X[i + parameters.getEPts() + 1], 
+                               Y[i + parameters.getEPts() + 1], 
+                               X[i + parameters.getEPts() + parameters.getFPts() + 1], 
+                               Y[i + parameters.getEPts() + parameters.getFPts() + 1]);
 
             if (area > parameters.getArea1()) {
                 greaterThanArea1 = true;

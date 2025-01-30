@@ -125,6 +125,113 @@ public class Testfile {
         }
 
         @Test
+        public void testPositiveConditionSeven() {
+
+                double[] X = {3.0, 5.0, 2.0};
+                double[] Y = {5.0, 3.0, 1.0};
+
+                int numpoints = 3;
+
+                Parameters parameters = new Parameters();
+                parameters.setKPts(1);
+                parameters.setLength1(3);
+                
+                assertTrue(ConditionsMet.conditionSeven(parameters, X, Y, numpoints));
+        }
+
+        @Test
+        public void testNegativeConditionSeven() {
+
+                double[] X = {3.0, 5.0, 2.0};
+                double[] Y = {5.0, 3.0, 1.0};
+
+                int numpoints = 3;
+
+                Parameters parameters = new Parameters();
+                parameters.setKPts(1);
+                parameters.setLength1(5);
+                
+                assertFalse(ConditionsMet.conditionSeven(parameters, X, Y, numpoints));
+        }
+
+        @Test
+        public void testConditionSevenIllegalArgument() {
+
+                double[] X = {1.0, 2.0, 3.0, 4.0, 2.0};
+                double[] Y = {5.0, 3.0, 1.0, 6.0, 3.0};
+
+                Parameters parameters = new Parameters();
+                parameters.setKPts(1);
+                parameters.setLength1(3);
+
+                int numpoints = 2;
+
+                Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                        ConditionsMet.conditionFive(X, numpoints);
+                });
+
+                String expected = "The length of X should be equal to numpoints";
+                String message = exception.getMessage();
+
+                assertEquals(expected, message);
+        }
+
+        @Test
+        public void testPositiveConditionEight() {
+
+                double[] X = {3.0, 5.0, 2.0, 7.0, 4.0};
+                double[] Y = {5.0, 3.0, 1.0, 6.0, 3.0};
+
+                int numpoints = 5;
+
+                Parameters parameters = new Parameters();
+                parameters.setAPts(1);
+                parameters.setBPts(1);
+                parameters.setRadius1(2);
+                
+                assertTrue(ConditionsMet.conditionEight(parameters, X, Y, numpoints));
+        }
+
+        @Test
+        public void testNegativeConditionEight() {
+
+                double[] X = {3.0, 5.0, 2.0, 7.0, 4.0};
+                double[] Y = {5.0, 3.0, 1.0, 6.0, 3.0};
+
+                int numpoints = 5;
+
+                Parameters parameters = new Parameters();
+                parameters.setAPts(1);
+                parameters.setBPts(1);
+                parameters.setRadius1(5);
+                
+                assertFalse(ConditionsMet.conditionEight(parameters, X, Y, numpoints));
+        }
+
+        @Test
+        public void testConditionEightIllegalArgument() {
+
+                double[] X = {3.0, 5.0, 2.0, 7.0, 4.0};
+                double[] Y = {5.0, 3.0, 1.0, 6.0, 3.0};
+
+                int numpoints = 5;
+
+                Parameters parameters = new Parameters();
+                parameters.setAPts(6);
+                parameters.setBPts(4);
+                parameters.setRadius1(5);
+
+                Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                        ConditionsMet.conditionEight(parameters, X, Y, numpoints);
+                });
+
+                String expected = "Invalid parameters!";
+                String message = exception.getMessage();
+
+                assertEquals(expected, message);
+        }
+
+        @Test
         public void testNegativeCondidtionNine() {
 
                 Parameters parameters = new Parameters();
@@ -226,7 +333,7 @@ public class Testfile {
 
                 assertEquals(expected, message);
         }
-
+  
         @Test
         public void testPositiveCondidtionEleven() {
                 Parameters parameters = new Parameters();
@@ -234,8 +341,6 @@ public class Testfile {
                 double[] X = { 6.0, 4.0, 5.0, 3.0 };
 
                 int numpoints = 4;
-
-
 
                 assertTrue(ConditionsMet.conditionEleven(parameters, X, numpoints));
         }
@@ -247,8 +352,6 @@ public class Testfile {
                 double[] X = { 0.0, 0.0, 0.0, 0.0};
 
                 int numpoints = 4;
-
-
 
                 assertFalse(ConditionsMet.conditionEleven(parameters, X, numpoints));
         }
@@ -262,25 +365,121 @@ public class Testfile {
 
                 int numpoints = 1;
 
-
                 assertFalse(ConditionsMet.conditionEleven(parameters, X, numpoints));
         }
+        
+          public void testPositiveConditionTwelve() {
 
+                double[] X = {1.0, 5.0, 4.0};
+                double[] Y = {1.0, 3.0, 5.0};
+
+                int numpoints = 3;
+
+                Parameters parameters = new Parameters();
+                parameters.setKPts(1);
+                parameters.setLength1(3);
+                parameters.setLength2(6);
+                
+                assertTrue(ConditionsMet.conditionTwelve(parameters, X, Y, numpoints));
+        }
+        
+        @Test
+          public void testLength1TooLongConditionTwelve() {
+
+                double[] X = {1.0, 5.0, 4.0};
+                double[] Y = {1.0, 3.0, 5.0};
+
+                int numpoints = 3;
+
+                Parameters parameters = new Parameters();
+                parameters.setKPts(1);
+                parameters.setLength1(5);
+                parameters.setLength2(6);
+                
+                assertFalse(ConditionsMet.conditionTwelve(parameters, X, Y, numpoints));
+        }
+
+        @Test
+          public void testLength2TooShortConditionTwelve() {
+
+                double[] X = {1.0, 5.0, 4.0};
+                double[] Y = {1.0, 3.0, 5.0};
+
+                int numpoints = 3;
+
+                Parameters parameters = new Parameters();
+                parameters.setKPts(1);
+                parameters.setLength1(3);
+                parameters.setLength2(5);
+                
+                assertFalse(ConditionsMet.conditionTwelve(parameters, X, Y, numpoints));
+        }
+
+        @Test
+          public void testPositiveConditionThirteen() {
+
+                double[] X = {3.0, 5.0, 2.0, 7.0, 4.0};
+                double[] Y = {5.0, 3.0, 1.0, 6.0, 3.0};
+
+                int numpoints = 5;
+
+                Parameters parameters = new Parameters();
+                parameters.setAPts(1);
+                parameters.setBPts(1);
+                parameters.setRadius1(2);
+                parameters.setRadius2(5);
+                
+                assertTrue(ConditionsMet.conditionThirteen(parameters, X, Y, numpoints));
+        }
+
+        @Test
+          public void testRadius1FitsConditionThirteen() {
+
+                double[] X = {3.0, 5.0, 2.0, 7.0, 4.0};
+                double[] Y = {5.0, 2.0, 3.0, 6.0, 3.0};
+
+                int numpoints = 5;
+
+                Parameters parameters = new Parameters();
+                parameters.setAPts(1);
+                parameters.setBPts(1);
+                parameters.setRadius1(4);
+                parameters.setRadius2(5);
+                
+                assertFalse(ConditionsMet.conditionThirteen(parameters, X, Y, numpoints));
+        }
+
+        @Test
+          public void testRadius2NoFitConditionThirteen() {
+
+                double[] X = {3.0, 5.0, 2.0, 7.0, 4.0};
+                double[] Y = {5.0, 3.0, 1.0, 6.0, 3.0};
+
+                int numpoints = 5;
+
+                Parameters parameters = new Parameters();
+                parameters.setAPts(1);
+                parameters.setBPts(1);
+                parameters.setRadius1(2);
+                parameters.setRadius2(2);
+                
+                assertFalse(ConditionsMet.conditionThirteen(parameters, X, Y, numpoints));
+        }
   
         @Test
           public void testPositiveConditionFourteen() {
 
                 // Expected area is 4
-                double[] X = {5.0, 9.0, 7.0};
-                double[] Y = {5.0, 5.0, 7.0};
+                double[] X = {5.0, 9.0, 7.0, 2.0, 8.0};
+                double[] Y = {5.0, 5.0, 7.0, 8.0, 2.0};
 
-                int numpoints = 3;
+                int numpoints = 5;
 
                 Parameters parameters = new Parameters();
                 parameters.setEPts(1);
                 parameters.setFPts(1);
                 parameters.setArea1(2);
-                parameters.setArea2(10);
+                parameters.setArea2(7);
                 
                 assertTrue(ConditionsMet.conditionFourteen(parameters, X, Y, numpoints));
         }
@@ -288,18 +487,16 @@ public class Testfile {
         @Test
         public void testFalseArea1ConditionFourteen() {
 
-                // Expected area is 4
-                double[] X = {5.0, 9.0, 7.0};
-                double[] Y = {5.0, 5.0, 7.0};
+                double[] X = {5.0, 4.0, 9.0, 2.0, 1.0};
+                double[] Y = {5.0, 5.0, 7.0, 6.0, 2.0};
 
-                int numpoints = 3;
+                int numpoints = 5;
 
                 Parameters parameters = new Parameters();
                 parameters.setEPts(1);
                 parameters.setFPts(1);
                 parameters.setArea1(5);
-                parameters.setArea2(10);
-                
+                parameters.setArea2(7);
 
                 assertFalse(ConditionsMet.conditionFourteen(parameters, X, Y, numpoints));
         }

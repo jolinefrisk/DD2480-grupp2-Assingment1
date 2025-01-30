@@ -12,6 +12,7 @@ public class Parameters {
     private int n_pts; // No. of consecutive pts. in LIC 6
     private int k_pts; // No. of int. pts. in LICs 7, 12
     private int a_pts; // No. of int. pts. in LICs 8, 13
+    private int b_pts; // No. of int. pts. in LICs 8, 13
     private int c_pts; // No. of int. pts. in LIC 9
     private int d_pts; // No. of int. pts. in LIC 9
     private int e_pts; // No. of int. pts. in LICs 10, 14
@@ -100,6 +101,14 @@ public class Parameters {
 
     public int getAPts() {
         return a_pts;
+    }
+
+    public void setBPts(int b_pts) {
+        this.b_pts = b_pts;
+    }
+
+    public int getBPts() {
+        return b_pts;
     }
 
     public void setCPts(int c_pts) {
