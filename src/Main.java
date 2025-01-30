@@ -24,7 +24,8 @@ public class Main {
 
     // INPUT VARIABLES
     public static int NUMPOINTS; // The number of planar data points
-    public static double[] POINTS; // Array containing the coordinates of data points
+    public static double[] X; // Array containing the X-coordinates of data points
+    public static double[] Y; // Array containing the Y-coordinates of data points
     public static CONNECTORS[][] LCM = new CONNECTORS[15][15]; // Logical connector Matrix
     public static boolean[] PUV = new boolean[NUMPOINTS]; // Preliminary Unlocking Vector
 
