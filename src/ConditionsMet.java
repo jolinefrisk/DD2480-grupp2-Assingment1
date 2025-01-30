@@ -233,7 +233,7 @@ public class ConditionsMet {
 
             // Collect unique quadrants in the subset
             for (int j = i; j < i + parameters.getQPts(); j++) {
-                if (x[j] >= 0 && y[j] > 0) {
+                if (x[j] >= 0 && y[j] >= 0) {
                     quadrantSet.add(1);
                 } else if (x[j] < 0 && y[j] >= 0) {
                     quadrantSet.add(2);
