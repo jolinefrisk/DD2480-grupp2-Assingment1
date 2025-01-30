@@ -111,7 +111,7 @@ public class ConditionsMet {
         return projectionVector;
     }
 
-    private boolean conditionZero(Parameters parameters, double[] x, double[] y, int numpoints) {
+    public static boolean conditionZero(Parameters parameters, double[] x, double[] y, int numpoints) {
         /*
          * input param Lenght 1 x,y vectir and numpoint
          * returns true if there exists at least one set of two consecutive data points
@@ -119,7 +119,7 @@ public class ConditionsMet {
          * else return false
          */
         if (numpoints < 2) {
-            return false;
+            throw new IllegalArgumentException("The number of points should be at least 2");
         }
 
         for (int i = 0; i < numpoints - 1; i++) {
@@ -139,7 +139,7 @@ public class ConditionsMet {
          * else return false
          */
         if (numpoints < 3) {
-            return false;
+            throw new IllegalArgumentException("The number of points should be at least 3");
         }
 
         // Iterate through all sets of three consecutive points.
@@ -167,7 +167,7 @@ public class ConditionsMet {
          */
         //Not sure how to both get PI and Epsilon from parameters so at moment Math.PI as PI and parameters as Epsilon
         if (numpoints < 3 || parameters.getEpsilon() < 0 || parameters.getEpsilon() >= Main.PI) {
-            return false; 
+            throw new IllegalArgumentException("The number of points should be at least 3 and Epsilon should be between 0 and PI"); 
         }
         for (int i = 0; i < numpoints - 2; i++) {
             double x1 = x[i], y1 = y[i];
@@ -193,7 +193,7 @@ public class ConditionsMet {
          * else return false
          */
         if (numpoints < 3 || parameters.getArea1() < 0) {
-            return false;
+            throw new IllegalArgumentException("The number of points should be at least 3 and Area1 should be greater than 0");
         }
 
         // Iterate through all sets of three consecutive points
@@ -225,7 +225,7 @@ public class ConditionsMet {
 
         if (parameters.getQPts() < 2 || parameters.getQPts() > numpoints || parameters.getQuads() < 1
                 || parameters.getQuads() > 3) {
-            return false; // Invalid parameters
+            throw new IllegalArgumentException("Invalid parameters!");
         }
         // Iterate over all possible Q_PTS
         for (int i = 0; i <= numpoints - parameters.getQPts(); i++) {
