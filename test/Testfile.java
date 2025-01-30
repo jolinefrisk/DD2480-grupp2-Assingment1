@@ -144,7 +144,26 @@ public class Testfile {
                 assertTrue(ConditionsMet.conditionOne(parameter, X,Y, numpoints));
         }
 
+        @Test
+        public void  testCondidtionOneIllegalArgument(){
+        
+                double[] X = {1.0, 1.5, 0.5, 3.0};
+                double[] Y = { 1.0, 1.5, 0.5 , 1.0};
+                int numpoints = 0;
 
+                Parameters parameter = new Parameters();
+                parameter.setRadius1(1.0);
+                String expected= "The number of points should be at least 3";
+                Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                        ConditionsMet.conditionOne(parameter, X, Y, numpoints);
+                });
+
+                String message = exception.getMessage();
+
+                assertEquals(expected, message);
+
+
+        }
 
 
         @Test
@@ -168,6 +187,27 @@ public class Testfile {
 
                 assertFalse(ConditionsMet.conditionTwo(parameter, X,Y, numpoints));
         }
+
+        @Test
+        public void  testCondidtionTwoIllegalArgument(){
+        
+                double[] X = {1.0, 1.5, 0.5, 3.0};
+                double[] Y = { 1.0, 1.5, 0.5 , 1.0};
+                int numpoints = 0;
+
+                Parameters parameter = new Parameters();
+                parameter.setEpsilon(1.0);
+                String expected= "The number of points should be at least 3 and Epsilon should be between 0 and PI";
+                Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                        ConditionsMet.conditionTwo(parameter, X, Y, numpoints);
+                });
+
+                String message = exception.getMessage();
+
+                assertEquals(expected, message);
+
+
+        }
         @Test
         public void testPositiveCondidtionThree() {
 
@@ -189,6 +229,26 @@ public class Testfile {
                 parameter.setArea1(3.0);
 
                 assertFalse(ConditionsMet.conditionThree(parameter, X,Y, numpoints));
+        }
+        @Test
+        public void  testCondidtionThreeIllegalArgument(){
+        
+                double[] X = {1.0, 1.5, 0.5, 3.0};
+                double[] Y = { 1.0, 1.5, 0.5 , 1.0};
+                int numpoints = 0;
+
+                Parameters parameter = new Parameters();
+                parameter.setArea1(1.0);
+                String expected= "The number of points should be at least 3 and Area1 should be greater than 0";
+                Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                        ConditionsMet.conditionThree(parameter, X, Y, numpoints);
+                });
+
+                String message = exception.getMessage();
+
+                assertEquals(expected, message);
+
+
         }
         @Test
         public void testPositiveCondidtionFour() {
@@ -214,7 +274,27 @@ public class Testfile {
 
                 assertFalse(ConditionsMet.conditionFour(parameter, X,Y, numpoints));
         }
+        @Test
+        public void  testCondidtionFourIllegalArgument(){
+        
+                double[] X = {1.0, 1.5, 0.5, 3.0};
+                double[] Y = { 1.0, 1.5, 0.5 , 1.0};
+                int numpoints = 0;
 
+                Parameters parameter = new Parameters();
+                parameter.setQPts(1);
+                parameter.setQuads(1);
+                String expected= "Invalid parameters!";
+                Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                        ConditionsMet.conditionFour(parameter, X, Y, numpoints);
+                });
+
+                String message = exception.getMessage();
+
+                assertEquals(expected, message);
+
+
+        }
         @Test
         public void testPositiveCondidtionFive() {
 
@@ -297,7 +377,6 @@ public class Testfile {
         public void testConditionSevenIllegalArgument() {
 
                 double[] X = {1.0, 2.0, 3.0, 4.0, 2.0};
-                double[] Y = {5.0, 3.0, 1.0, 6.0, 3.0};
 
                 Parameters parameters = new Parameters();
                 parameters.setKPts(1);
