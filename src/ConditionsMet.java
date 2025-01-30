@@ -296,7 +296,7 @@ public class ConditionsMet {
             double end_X = X[end];
             double end_Y = Y[end];
 
-            for(int j=i+1; j<end-1; j++){
+            for(int j=i+1; j<end; j++){
                 double data_point_X = X[j];
                 double data_point_Y = Y[j];
 
