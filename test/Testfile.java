@@ -90,8 +90,8 @@ public class Testfile {
         @Test
         public void testNegativeCondidtionZero() {
 
-                double[] X = {1.0, 1.5, 0.5, 3.0};
-                double[] Y = { 1.0, 1.5, 0.5 , 1.0};
+                double[] X = {1, 1, 1, 1}; 
+                double[] Y = {2, 2, 2, 2};
                 int numpoints = 4;
                 Parameters parameter = new Parameters();
                 parameter.setLength1(1.0);
