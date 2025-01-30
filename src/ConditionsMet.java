@@ -271,25 +271,34 @@ public class ConditionsMet {
     }
 
     public static boolean conditionSix(Parameters parameters, double[] X, double[] Y, int numpoints) {
-        /*
-         * 
-         */
-            if (numpoints < 3) {
-                return false;
-            }
 
-            double DIST = parameters.getDist();
+         if (numpoints < 3) {
+            throw new IllegalArgumentException("The number of points should be at least 3");
+        }
 
-            double start_X = X[0];
-            double start_Y = Y[0];
+        if (X.length != numpoints || Y.length != numpoints){
+            throw new IllegalArgumentException("X and Y should be the same length as numpoints");
+        }
 
-            int end = numpoints-1;
+        int n_pts = parameters.getNPts();
+
+        if (n_pts > numpoints){
+            throw new IllegalArgumentException("NPts should be equal to or less than numpoints");
+        }
+
+        double DIST = parameters.getDist();
+
+        for (int i = 0; i < numpoints - n_pts+1; i++){
+            double start_X = X[i];
+            double start_Y = Y[i];
+
+            int end = i+(n_pts-1);
             double end_X = X[end];
             double end_Y = Y[end];
 
-            for(int i=1; i<end-1; i++){
-                double data_point_X = X[i];
-                double data_point_Y = Y[i];
+            for(int j=i+1; j<end-1; j++){
+                double data_point_X = X[j];
+                double data_point_Y = Y[j];
 
                 if (start_X == end_X && start_Y == end_Y) {
                     double distance_dp = distance(data_point_X, data_point_Y, end_X, end_Y);
@@ -304,6 +313,7 @@ public class ConditionsMet {
                     }
                 }
             }
+        }
         return false;
     }
 
