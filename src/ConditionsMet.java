@@ -29,7 +29,7 @@ public class ConditionsMet {
                 return conditionSix(parameters);
 
             case 7:
-                return conditionSeven(parameters);
+                return conditionSeven(parameters, X, Y, numpoints);
 
             case 8:
                 return conditionEight(parameters, X, Y, numpoints);
@@ -261,7 +261,22 @@ public class ConditionsMet {
         return false;
     }
 
-    private boolean conditionSeven(Parameters parameters) {
+    public static boolean conditionSeven(Parameters parameters, double[] X, double[] Y, int numpoints) {
+        if (1 <= parameters.getKPts() && parameters.getKPts() <= (numpoints - 2) && numpoints >= 3) {
+
+            double distance = 0;
+
+            for (int i = 0; i < numpoints - (parameters.getKPts() + 1); i++) {
+                distance = distance(X[i], Y[i], X[i + parameters.getKPts() + 1], Y[i + parameters.getKPts() + 1]);
+
+                if (distance > parameters.getLength1()) {
+                    return true;
+                }
+            }
+        } else {
+            throw new IllegalArgumentException("Invalid parameters!");
+        }
+
         return false;
     }
 

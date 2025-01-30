@@ -125,6 +125,58 @@ public class Testfile {
         }
 
         @Test
+        public void testPositiveConditionSeven() {
+
+                double[] X = {3.0, 5.0, 2.0};
+                double[] Y = {5.0, 3.0, 1.0};
+
+                int numpoints = 3;
+
+                Parameters parameters = new Parameters();
+                parameters.setKPts(1);
+                parameters.setLength1(3);
+                
+                assertTrue(ConditionsMet.conditionSeven(parameters, X, Y, numpoints));
+        }
+
+        @Test
+        public void testNegativeConditionSeven() {
+
+                double[] X = {3.0, 5.0, 2.0};
+                double[] Y = {5.0, 3.0, 1.0};
+
+                int numpoints = 3;
+
+                Parameters parameters = new Parameters();
+                parameters.setKPts(1);
+                parameters.setLength1(5);
+                
+                assertFalse(ConditionsMet.conditionSeven(parameters, X, Y, numpoints));
+        }
+
+        @Test
+        public void testConditionSevenIllegalArgument() {
+
+                double[] X = {1.0, 2.0, 3.0, 4.0, 2.0};
+                double[] Y = {5.0, 3.0, 1.0, 6.0, 3.0};
+
+                Parameters parameters = new Parameters();
+                parameters.setKPts(1);
+                parameters.setLength1(3);
+
+                int numpoints = 2;
+
+                Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                        ConditionsMet.conditionFive(X, numpoints);
+                });
+
+                String expected = "The length of X should be equal to numpoints";
+                String message = exception.getMessage();
+
+                assertEquals(expected, message);
+        }
+
+        @Test
         public void testPositiveConditionEight() {
 
                 double[] X = {3.0, 5.0, 2.0, 7.0, 4.0};
