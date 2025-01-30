@@ -333,8 +333,41 @@ public class Testfile {
 
                 assertEquals(expected, message);
         }
+  
+        @Test
+        public void testPositiveCondidtionEleven() {
+                Parameters parameters = new Parameters();
+                parameters.setGPts(1);
+                double[] X = { 6.0, 4.0, 5.0, 3.0 };
+
+                int numpoints = 4;
+
+                assertTrue(ConditionsMet.conditionEleven(parameters, X, numpoints));
+        }
 
         @Test
+        public void testNegativeCondidtionEleven() {
+                Parameters parameters = new Parameters();
+                parameters.setGPts(1);
+                double[] X = { 0.0, 0.0, 0.0, 0.0};
+
+                int numpoints = 4;
+
+                assertFalse(ConditionsMet.conditionEleven(parameters, X, numpoints));
+        }
+
+        @Test
+        public void testCondidtionElevenIllegalArgument() {
+
+                Parameters parameters = new Parameters();
+                parameters.setGPts(1);
+                double[] X = { 0.0};
+
+                int numpoints = 1;
+
+                assertFalse(ConditionsMet.conditionEleven(parameters, X, numpoints));
+        }
+        
           public void testPositiveConditionTwelve() {
 
                 double[] X = {1.0, 5.0, 4.0};

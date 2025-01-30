@@ -41,7 +41,7 @@ public class ConditionsMet {
                 return conditionTen(parameters, X, Y, numpoints);
 
             case 11:
-                return conditionEleven(parameters);
+                return conditionEleven(parameters, X, numpoints);
 
             case 12:
                 return conditionTwelve(parameters, X, Y, numpoints);
@@ -379,8 +379,28 @@ public class ConditionsMet {
 
     }
 
-    private boolean conditionEleven(Parameters parameters) {
-        return false;
+    public static boolean conditionEleven(Parameters parameters, double[] X, int numpoints) {
+
+
+        if (X.length == numpoints) {
+            int Gpts = parameters.getGPts();
+            if (numpoints >= 3 && Gpts >= 1 && Gpts <= numpoints-2 ){
+
+                for (int i = 0; i < numpoints - Gpts - 1; i++) {
+                    if (X[i + Gpts + 1] - X[i] < 0) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            else{
+                return false;
+            }
+         
+        } else {
+            throw new IllegalArgumentException("The length of X should be equal to numpoints");
+        }   
+        
     }
 
     public static boolean conditionTwelve(Parameters parameters, double[] X, double[] Y, int numpoints) {
@@ -407,7 +427,7 @@ public class ConditionsMet {
                 return true;
             }
         }
-
+  
         return false;
     }
 
