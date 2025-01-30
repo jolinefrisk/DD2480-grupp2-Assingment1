@@ -1,4 +1,7 @@
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.beans.Transient;
+
 import org.junit.jupiter.api.Test;
 
 public class Testfile {
@@ -898,7 +901,7 @@ public class Testfile {
 
                 assertEquals(expected, Main.launch(FUV));
         }
-
+  
         @Test
         public void testValidCMVV() {
 
@@ -985,6 +988,121 @@ public class Testfile {
                 String message = exception.getMessage();
 
                 assertEquals(expected, message);
+        }
+  
+        @Test
+        public void testDECIDETrue() {
+                Parameters parameters = new Parameters();
+                parameters.setLength1(5.0);
+                parameters.setRadius1(2.0);
+                parameters.setEpsilon(0.1);
+                parameters.setArea1(0);
+                parameters.setQPts(3);
+                parameters.setQuads(2);
+                parameters.setDist(2);
+                parameters.setNPts(1);
+                parameters.setKPts(1);
+                parameters.setAPts(1);
+                parameters.setBPts(1);
+                parameters.setCPts(1);
+                parameters.setDPts(1);
+                parameters.setEPts(1);
+                parameters.setFPts(1);
+                parameters.setGPts(1);
+                parameters.setLength2(5);
+                parameters.setArea2(5);
+
+                /*
+                 * This part is honestly stupid. But it is so tricky testing when
+                 * global variables are stored in Main.
+                 * 
+                 * Note for next time, either use solution:
+                 * 
+                 * 1. Have Main class call functions and use a different class for Decide function
+                 * 2. Make a helper "tester" Decide function with more input variables that call Decide
+                 * 3. Create constructor and instantiate values there (probably the best in Java?)
+                 */
+                Main.NUMPOINTS = 5;
+
+                double[] X = {4.0, 2.0, 6.0, 3.0, 2.0};
+                double[] Y = {3.0, 2.0, 6.0, 5.0, 1.0};
+                Main.X = X;
+                Main.Y = Y;
+
+                Main.CONNECTORS[][] LCM = new Main.CONNECTORS[15][15];
+                // Fill the matrix with NOTUSED
+                for (int i = 0; i < 15; i++) {
+                        for (int j = 0; j < 15; j++) {
+                                LCM[i][j] = Main.CONNECTORS.NOTUSED;
+                        }
+                }
+                Main.LCM = LCM;
+                
+                boolean[] PUV = {true, false, true, true, true, false, true,
+                         true, false, false, false, true, true, false, true};
+                Main.PUV = PUV;
+
+                boolean expected = true;
+
+                assertEquals(expected, Main.DECIDE(parameters));
+        }
+
+        @Test
+        public void testDECIDEFalse() {
+                Parameters parameters = new Parameters();
+                parameters.setLength1(5.0);
+                parameters.setRadius1(2.0);
+                parameters.setEpsilon(0.1);
+                parameters.setArea1(0);
+                parameters.setQPts(3);
+                parameters.setQuads(2);
+                parameters.setDist(2);
+                parameters.setNPts(1);
+                parameters.setKPts(1);
+                parameters.setAPts(1);
+                parameters.setBPts(1);
+                parameters.setCPts(1);
+                parameters.setDPts(1);
+                parameters.setEPts(1);
+                parameters.setFPts(1);
+                parameters.setGPts(1);
+                parameters.setLength2(5);
+                parameters.setArea2(5);
+
+                /*
+                 * This part is honestly stupid. But it is so tricky testing when
+                 * global variables are stored in Main.
+                 * 
+                 * Note for next time, either use solution:
+                 * 
+                 * 1. Have Main class call functions and use a different class for Decide function
+                 * 2. Make a helper "tester" Decide function with more input variables that call Decide
+                 * 3. Create constructor and instantiate values there (probably the best in Java?)
+                 */
+                Main.NUMPOINTS = 5;
+
+                double[] X = {4.0, 2.0, 6.0, 3.0, 2.0};
+                double[] Y = {3.0, 2.0, 6.0, 5.0, 1.0};
+                Main.X = X;
+                Main.Y = Y;
+
+                Main.CONNECTORS[][] LCM = new Main.CONNECTORS[15][15];
+                // Fill the matrix with ANDD
+                for (int i = 0; i < 15; i++) {
+                        for (int j = 0; j < 15; j++) {
+                                LCM[i][j] = Main.CONNECTORS.ANDD;
+                        }
+                }
+                Main.LCM = LCM;
+                Main.LCM = LCM;
+                
+                boolean[] PUV = {true, false, true, true, true, false, true,
+                        true, false, false, false, true, true, false, true};
+                Main.PUV = PUV;
+
+                boolean expected = false;
+
+                assertEquals(expected, Main.DECIDE(parameters));
         }
 
 }
