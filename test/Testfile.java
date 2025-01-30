@@ -149,7 +149,7 @@ public class Testfile {
         
                 double[] X = {1.0, 1.5, 0.5, 3.0};
                 double[] Y = { 1.0, 1.5, 0.5 , 1.0};
-                int numpoints = 0;
+                int numpoints = 2;
 
                 Parameters parameter = new Parameters();
                 parameter.setRadius1(1.0);
@@ -196,7 +196,7 @@ public class Testfile {
                 int numpoints = 0;
 
                 Parameters parameter = new Parameters();
-                parameter.setEpsilon(1.0);
+                parameter.setEpsilon(0.0);
                 String expected= "The number of points should be at least 3 and Epsilon should be between 0 and PI";
                 Exception exception = assertThrows(IllegalArgumentException.class, () -> {
                         ConditionsMet.conditionTwo(parameter, X, Y, numpoints);
@@ -238,7 +238,7 @@ public class Testfile {
                 int numpoints = 0;
 
                 Parameters parameter = new Parameters();
-                parameter.setArea1(1.0);
+                parameter.setArea1(0.0);
                 String expected= "The number of points should be at least 3 and Area1 should be greater than 0";
                 Exception exception = assertThrows(IllegalArgumentException.class, () -> {
                         ConditionsMet.conditionThree(parameter, X, Y, numpoints);
