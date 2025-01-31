@@ -64,6 +64,7 @@ __Limitations:__ liability and warranty.
 
 
 ## Essence Standard Evaluation
+Our team has gone through different stages of the Essence Standard Evaluation, but we feel like we are currently in the "In Use" stage. We’ve set up basic rules and agreed on the tools and methods we need to work effectively. Right now, we’re actively using these tools and practices to complete our tasks, and we regularly check and adjust them to fit our needs. Everyone on the team is involved in making sure our way of working is efficient, and we support each other in using these tools. We also have a way to give and receive feedback to improve how we work together. Even though some of us might feel like we’ve been in other stages at times, overall, we believe we are in the "In Use" stage because we are applying what we’ve established and making it work for us. 
 
 ## Statement of Contributions
 - __Jacob Lindström Bjäreklint__ - Implemented PUM(), con 5, 9, 10, 11, along with the corresponding unit tests. Also added error handling to CMV() and unit tests for the method.
