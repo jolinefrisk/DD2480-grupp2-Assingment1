@@ -500,7 +500,7 @@ public class ConditionsMet {
 
     public static boolean conditionTwelve(Parameters parameters, double[] X, double[] Y, int numpoints) {
         if (parameters.getLength2() < 0 || numpoints < 3) {
-            return true;
+            return false;
         }
 
         double distance = 0;
@@ -562,7 +562,7 @@ public class ConditionsMet {
 
     public static boolean conditionFourteen(Parameters parameters, double[] X, double[] Y, int numpoints) {
         // Initial conditions
-        if (parameters.getArea2() <= 0 || numpoints < 5) {
+        if (parameters.getArea2() < 0 || numpoints < 5) {
             return false;
         }
 
