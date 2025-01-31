@@ -133,8 +133,11 @@ public class Main {
                 }
 
                 boolean no_false = true;
-                for (int el = 0; el < n; el++) {
-                    if (!PUM[i][el]) {
+                for (int col = 0; col < n; col++) {
+                    if (col == i) {
+                        continue;
+                    }
+                    if (!PUM[i][col]) {
                         no_false = false;
                         break;
                     }
