@@ -66,7 +66,7 @@ __Limitations:__ liability and warranty.
 ## Essence Standard Evaluation
 
 ## Statement of Contributions
-- Jacob Lindström Bjäreklint - Implemented PUM(), con 5, 9, 10, 11, along with the corresponding unit tests. Also added error handling to CMV() and unit tests for the method.
-- Roger Chen
-- Joline Frisk
-- Victoria Hellström - Implemented FUV(), launch() in Main.java and vectorProjection() and conditionSix() for LIC in ConditionsMet.java. Additionally, created unit tests for these and wrote the README file.
+- __Jacob Lindström Bjäreklint__ - Implemented PUM(), con 5, 9, 10, 11, along with the corresponding unit tests. Also added error handling to CMV() and unit tests for the method.
+- __Roger Chen__ -
+- __Joline Frisk__ -
+- __Victoria Hellström__ - Implemented FUV(), launch() in Main.java and vectorProjection() and conditionSix() for LIC in ConditionsMet.java. Created unit tests for these and wrote the README file.
