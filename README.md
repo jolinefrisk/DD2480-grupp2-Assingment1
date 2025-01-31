@@ -68,5 +68,5 @@ __Limitations:__ liability and warranty.
 ## Statement of Contributions
 - __Jacob Lindström Bjäreklint__ - Implemented PUM(), con 5, 9, 10, 11, along with the corresponding unit tests. Also added error handling to CMV() and unit tests for the method.
 - __Roger Chen__ -
-- __Joline Frisk__ -Implemented CMV conditons 0, 1, 2, 3, and 4 along with corresponding unit test.
+- __Joline Frisk__ -Implemented CMV conditons 0, 1, 2, 3, and 4 along with corresponding unit test. As well as extra functions for calculations in other conditions methods.
 - __Victoria Hellström__ - Implemented FUV(), launch() in Main.java and vectorProjection() and conditionSix() for LIC in ConditionsMet.java. Created unit tests for these and wrote the README file.
