@@ -34,7 +34,7 @@ __Limitations:__ liability and warranty.
 ## Essence Standard Evaluation
 
 ## Statement of Contributions
-- Jacob Lindström Bjäreklint
+- Jacob Lindström Bjäreklint - Implemented PUM(), con 5, 9, 10, 11, along with the corresponding unit tests. Also added error handling to CMV() and unit tests for the method.
 - Roger Chen
 - Joline Frisk
 - Victoria Hellström - FUV(), launch(), con6 in LIC, tests, README
