@@ -73,40 +73,45 @@ public class Main {
     }
 
     public static boolean[][] PUM(CONNECTORS[][] LCM, boolean[] CMV) {
-
+        /*
+         * input LCM and CMV
+         * returns PUM according to the specification
+         */
         int n = CMV.length;
         boolean[][] PUM_matrix = new boolean[n][n];
 
-        if (n == LCM[0].length && n == LCM[1].length) {
-
-            for (int i = 0; i < n; i++) {
-
-                for (int j = 0; j < n; j++) {
-
-                    if (LCM[i][j] == CONNECTORS.NOTUSED) {
-                        PUM_matrix[i][j] = true;
-                    }
-
-                    else if (LCM[i][j] == CONNECTORS.ANDD) {
-                        if (CMV[i] == true && CMV[j] == true) {
-                            PUM_matrix[i][j] = true;
-                        }
-                    }
-
-                    else if (LCM[i][j] == CONNECTORS.ORR) {
-                        if (CMV[i] == true || CMV[j] == true) {
-                            PUM_matrix[i][j] = true;
-                        }
-                    }
-
-                }
-            }
-        }
-
-        else {
+        if (LCM.length != n) {
             throw new IllegalArgumentException("The LCM should be a n x n vector, where n is the length of CMV");
         }
 
+        for (int i = 0; i < n; i++) {
+            if (LCM[i].length != n) {
+                throw new IllegalArgumentException("The LCM should be a n x n vector, where n is the length of CMV");
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+
+            for (int j = 0; j < n; j++) {
+
+                if (LCM[i][j] == CONNECTORS.NOTUSED) {
+                    PUM_matrix[i][j] = true;
+                }
+
+                else if (LCM[i][j] == CONNECTORS.ANDD) {
+                    if (CMV[i] == true && CMV[j] == true) {
+                        PUM_matrix[i][j] = true;
+                    }
+                }
+
+                else if (LCM[i][j] == CONNECTORS.ORR) {
+                    if (CMV[i] == true || CMV[j] == true) {
+                        PUM_matrix[i][j] = true;
+                    }
+                }
+
+            }
+        }
         return PUM_matrix;
     }
 
