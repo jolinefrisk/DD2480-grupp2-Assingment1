@@ -260,6 +260,13 @@ public class ConditionsMet {
 
     public static boolean conditionFive(double[] X, int numpoints) {
 
+        /*
+         * input X vector and numpoints
+         * returns true if there exists at least one set of consecutive data points
+         * such that X[j] - X[i] < 0
+         * else return false
+         */
+
         if (X.length == numpoints) {
 
             for (int i = 0; i < numpoints - 1; i++) {
@@ -371,6 +378,18 @@ public class ConditionsMet {
 
     public static boolean conditionNine(Parameters parameters, double[] X, double[] Y, int numpoints) {
 
+        /*
+         * input param, X vector, Y vector and numpoints
+         * returns true if there exists at least one group of three data
+         * points, spaced
+         * by CPts and DPPs consecutive intervening points, such that an angle is formed
+         * which is less than PI - Epsilon
+         * or greater than
+         * PI + epsilon. Numpoints < 5, 1 <= CPts, 1 <= DPts and CPts + DPts <=
+         * Numpoints - 3 needs all to be fullfilled.
+         * else return false
+         */
+
         int Cpts = parameters.getCPts();
         int Dpts = parameters.getDPts();
         if (X.length == numpoints && Y.length == numpoints) {
@@ -407,6 +426,16 @@ public class ConditionsMet {
     }
 
     public static boolean conditionTen(Parameters parameters, double[] X, double[] Y, int numpoints) {
+
+        /*
+         * input param, X vector, Y vector and numpoints
+         * returns true if there exists at three datapoints in a set, seperated
+         * by EPts and FPTs consecutive data points apart,
+         * that forms a triangle with an area greater than AREA1. Numpoints < 5, 1 <=
+         * EPts, 1 <= FPts and EPts + FPts <= Numpoints - 3 needs all to be fullfilled.
+         * else return false
+         */
+
         int Epts = parameters.getEPts();
         int Fpts = parameters.getFPts();
         if (X.length == numpoints && Y.length == numpoints) {
@@ -440,6 +469,14 @@ public class ConditionsMet {
     }
 
     public static boolean conditionEleven(Parameters parameters, double[] X, int numpoints) {
+
+        /*
+         * input param, X vector, Y vector and numpoints
+         * returns true if there exists at least one pair of two data points, seperated
+         * by GPts consecutive intervening data points, that fulfills X[j]- X[i] < 0
+         * Numpoints < 3 and 1 <= Gpts <= Numpoints needs to be fullfilled.
+         * else return false
+         */
 
         if (X.length == numpoints) {
             int Gpts = parameters.getGPts();
