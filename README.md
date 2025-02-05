@@ -53,6 +53,11 @@ The decision-making process follows these steps:
 3. Generate the Final Unlocking Vector (FUV) – *Checks PUM and PUV conditions which are required for launch.*
 4. Make the Final Decision with launch() – *If all required conditions in FUV are met, launch() returns the final boolean decisition. The final decition is made from launch, the program outputs "YES" (true - launch) or "NO" (false - no launch).*
 
+
+## Dependencies
+- **Java JRE:** 15.0.1
+- **JUnit Testing Framework:** JUnit 5 (Platform 1.11.4)
+
 ## Rights to use it
 __Copyright <2025> <Group 2>__
 
